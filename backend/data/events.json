@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Generative AI Workshop",
+    "category": "Technology",
+    "price": 500,
+    "date": "2026-06-15",
+    "venue": "Tech Park"
+  },
+  {
+    "id": 2,
+    "name": "Music Concert",
+    "category": "Entertainment",
+    "price": 1200,
+    "date": "2026-06-20",
+    "venue": "Open Air Theatre"
+  }
+]
