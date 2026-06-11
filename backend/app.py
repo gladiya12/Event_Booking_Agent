@@ -19,5 +19,17 @@ def get_events():
 
     return jsonify(events)
 
+@app.route("/events/<int:event_id>")
+def get_event(event_id):
+
+    with open("data/events.json", "r") as file:
+        events = json.load(file)
+
+    for event in events:
+        if event["id"] == event_id:
+            return jsonify(event)
+
+    return jsonify({"message": "Event not found"}), 404
+
 if __name__ == "__main__":
     app.run(debug=True)

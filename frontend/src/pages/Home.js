@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../App.css";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [events, setEvents] = useState([]);
@@ -55,7 +56,9 @@ function Home() {
 
             <p>₹{event.price}</p>
 
-            <button>View Details</button>
+            <Link to={`/event/${event.id}`}>
+                <button>View Details</button>
+            </Link>
           </div>
         ))}
       </div>
