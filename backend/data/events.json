@@ -5,14 +5,25 @@
     "category": "Technology",
     "price": 500,
     "date": "2026-06-15",
-    "venue": "Tech Park"
+    "venue": "Tech Park",
+    "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e"
   },
   {
     "id": 2,
     "name": "Music Concert",
-    "category": "Entertainment",
+    "category": "Music",
     "price": 1200,
     "date": "2026-06-20",
-    "venue": "Open Air Theatre"
+    "venue": "Open Air Theatre",
+    "image": "https://images.unsplash.com/photo-1501386761578-eac5c94b800a"
+  },
+  {
+    "id": 3,
+    "name": "Startup Meetup",
+    "category": "Business",
+    "price": 300,
+    "date": "2026-06-25",
+    "venue": "Innovation Hub",
+    "image": "https://images.unsplash.com/photo-1515169067868-5387ec356754"
   }
 ]
