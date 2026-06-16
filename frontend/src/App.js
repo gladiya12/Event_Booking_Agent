@@ -8,6 +8,9 @@ import Booking from "./pages/Booking";
 import Confirmation from "./pages/Confirmation";
 import MyBookings from "./pages/MyBookings";
 import Profile from "./pages/Profile";
+import SeatSelection from "./pages/SeatSelection";
+import BookingSuccess from "./pages/BookingSuccess";
+import Payment from "./pages/Payment";
 
 function App() {
   return (
@@ -49,6 +52,20 @@ function App() {
         <Route
           path="/profile"
           element={<Profile />}
+        />
+
+        <Route
+          path="/seat-selection"
+          element={<SeatSelection />}
+        />
+        <Route
+          path="/booking-success"
+          element={<BookingSuccess />}
+        />
+
+        <Route
+          path="/payment"
+          element={<Payment />}
         />
 
       </Routes>

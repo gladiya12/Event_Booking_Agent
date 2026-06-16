@@ -111,7 +111,11 @@ function Booking() {
               JSON.stringify(existingBookings)
             );
 
-            navigate("/confirmation");
+            navigate("/seat-selection", {
+              state: {
+                event
+              }
+            });
           }}
           style={{
             padding: "12px 20px",

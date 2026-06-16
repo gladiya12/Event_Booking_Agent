@@ -1,9 +1,13 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { useState } from "react";
 
 function Login() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
 
   return (
     <>
@@ -11,83 +15,144 @@ function Login() {
 
       <div
         style={{
-          maxWidth: "400px",
-          margin: "100px auto",
-          background: "white",
-          padding: "30px",
-          borderRadius: "10px",
-          boxShadow: "0px 2px 10px rgba(0,0,0,0.1)"
+          minHeight: "calc(100vh - 140px)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          background: "#f8fafc",
+          padding: "40px"
         }}
       >
-        <button
-          onClick={() => navigate(-1)}
-          style={{
-            padding: "8px 15px",
-            marginBottom: "20px",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-            background: "#e5e7eb"
-          }}
-        >
-          ← Back
-        </button>
-
-        <h1>Login</h1>
-
-        <input
-          type="email"
-          placeholder="Email"
+        <div
           style={{
             width: "100%",
-            padding: "10px",
-            marginBottom: "15px"
-          }}
-        />
-
-        <input
-          type="password"
-          placeholder="Password"
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginBottom: "15px"
-          }}
-        />
-
-        <button
-          onClick={() =>
-            navigate("/booking", {
-              state: {
-                event: location.state?.event
-              }
-            })
-          }
-          style={{
-            width: "100%",
-            padding: "10px",
-            background: "#2563eb",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer"
+            maxWidth: "450px",
+            background: "white",
+            padding: "40px",
+            borderRadius: "20px",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.08)"
           }}
         >
-          Login
-        </button>
+          <div style={{ textAlign: "center" }}>
+            <h1
+              style={{
+                marginBottom: "10px",
+                color: "#1e293b"
+              }}
+            >
+              Welcome Back 👋
+            </h1>
 
-        <p
-          style={{
-            marginTop: "20px",
-            textAlign: "center"
-          }}
-        >
-          Don't have an account?{" "}
-          <Link to="/register">
-            Register
-          </Link>
-        </p>
+            <p
+              style={{
+                color: "#64748b",
+                marginBottom: "30px"
+              }}
+            >
+              Login to continue your event booking journey.
+            </p>
+          </div>
+
+          <input
+  type="email"
+  placeholder="Enter Email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  style={{
+    width: "100%",
+    padding: "14px",
+    marginBottom: "15px",
+    borderRadius: "10px",
+    border: "1px solid #cbd5e1",
+    fontSize: "15px"
+  }}
+/>
+
+          <input
+  type="password"
+  placeholder="Enter Password"
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}
+  style={{
+    width: "100%",
+    padding: "14px",
+    marginBottom: "20px",
+    borderRadius: "10px",
+    border: "1px solid #cbd5e1",
+    fontSize: "15px"
+  }}
+/>
+
+          <button
+           onClick={() => {
+  localStorage.setItem(
+    "currentUser",
+    JSON.stringify({
+      name: email.split("@")[0],
+      email: email
+    })
+  );
+
+  const redirectTo =
+    location.state?.redirectTo;
+
+  const bookingData =
+    location.state?.bookingData;
+
+  if (
+    redirectTo === "/seat-selection"
+  ) {
+    navigate("/seat-selection", {
+      state: bookingData
+    });
+  } else {
+    navigate("/");
+  }
+
+  window.location.reload();
+}}
+            style={{
+              width: "100%",
+              padding: "15px",
+              border: "none",
+              borderRadius: "12px",
+              background:
+                "linear-gradient(135deg,#7c3aed,#a855f7)",
+              color: "white",
+              fontSize: "16px",
+              fontWeight: "600",
+              cursor: "pointer",
+              boxShadow:
+                "0 10px 25px rgba(124,58,237,0.35)"
+            }}
+          >
+            Login
+          </button>
+
+          <div
+            style={{
+              textAlign: "center",
+              marginTop: "25px"
+            }}
+          >
+            <p style={{ color: "#64748b" }}>
+              Don't have an account?
+            </p>
+
+            <Link
+  to="/register"
+  state={{
+    redirectTo: location.state?.redirectTo,
+    bookingData: location.state?.bookingData
+  }}
+>
+              Create Account
+            </Link>
+          </div>
+        </div>
       </div>
+
+      <Footer />
     </>
   );
 }

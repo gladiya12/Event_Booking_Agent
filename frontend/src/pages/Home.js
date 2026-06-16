@@ -36,27 +36,40 @@ function Home() {
       {/* Hero Section */}
       <div
         style={{
+          minHeight: "50vh",
+          background:
+            "linear-gradient(135deg,#0f172a,#1e1b4b,#312e81)",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
           textAlign: "center",
-          padding: "60px 20px"
+          padding: "40px 20px",
+          color: "white"
         }}
       >
         <h1
           style={{
-            fontSize: "42px",
-            marginBottom: "10px"
+            fontSize: "clamp(2.8rem, 5vw, 4.5rem)",
+            fontWeight: "700",
+            lineHeight: "1.1",
+            maxWidth: "900px",
+            marginBottom: "20px"
           }}
         >
-          🎟 Discover Amazing Events
+          Discover Opportunities to Connect and Grow
         </h1>
 
         <p
           style={{
-            fontSize: "18px",
-            color: "#555",
+            fontSize: "1.2rem",
+            color: "#cbd5e1",
+            maxWidth: "700px",
             marginBottom: "30px"
           }}
         >
-          Book workshops, concerts and business meetups easily.
+          Find workshops, concerts and business events
+          tailored to your interests.
         </p>
 
         <input
@@ -65,48 +78,77 @@ function Home() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           style={{
-            width: "350px",
-            padding: "12px",
-            borderRadius: "8px",
-            border: "1px solid #ccc"
+            width: "550px",
+            maxWidth: "90%",
+            padding: "16px 22px",
+            borderRadius: "50px",
+            border: "none",
+            outline: "none",
+            fontSize: "17px",
+            boxShadow: "0 5px 20px rgba(0,0,0,0.25)"
           }}
         />
       </div>
 
-      {/* Category Filters */}
+      {/* Category Buttons */}
       <div
+  style={{
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    gap: "15px",
+    marginTop: "40px",
+    marginBottom: "50px"
+  }}
+>
+  {[
+    "All",
+    ...new Set(
+      events.map((event) => event.category)
+    )
+  ].map((category) => (
+    <button
+      key={category}
+      onClick={() =>
+        setSelectedCategory(category)
+      }
+      style={{
+        padding: "12px 25px",
+        borderRadius: "30px",
+        border: "none",
+        cursor: "pointer",
+        background:
+          selectedCategory === category
+            ? "#7c3aed"
+            : "#1e293b",
+        color: "white",
+        fontWeight: "600",
+        fontSize: "15px"
+      }}
+    >
+      {category}
+    </button>
+  ))}
+</div>
+
+      {/* Section Title */}
+      <h1
         style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "10px",
-          marginBottom: "40px"
+          textAlign: "center",
+          fontSize: "48px",
+          marginBottom: "50px"
         }}
       >
-        <button onClick={() => setSelectedCategory("All")}>
-          All
-        </button>
+        Featured Events
+      </h1>
 
-        <button onClick={() => setSelectedCategory("Technology")}>
-          Technology
-        </button>
-
-        <button onClick={() => setSelectedCategory("Music")}>
-          Music
-        </button>
-
-        <button onClick={() => setSelectedCategory("Business")}>
-          Business
-        </button>
-      </div>
-
-      <h1 className="heading">Top Events</h1>
-
-      {/* No Events Found */}
+      {/* Event Cards */}
       {filteredEvents.length === 0 ? (
         <div
           style={{
             textAlign: "center",
-            marginTop: "50px"
+            marginTop: "50px",
+            marginBottom: "100px"
           }}
         >
           <h2>🔍 No Events Found</h2>
@@ -116,42 +158,55 @@ function Home() {
         <div className="event-grid">
           {filteredEvents.map((event) => (
             <div
-                key={event.id}
-                className="event-card"
+              key={event.id}
+              className="event-card"
             >
-                <img
+              <img
                 src={event.image}
                 alt={event.name}
                 className="event-image"
-                />
+              />
 
-                <div className="event-content">
-
+              <div className="event-content">
                 <span className="category-badge">
-                    {event.category}
+                  {event.category}
                 </span>
 
-                <h3>{event.name}</h3>
+                <h3
+                  style={{
+                    marginTop: "15px",
+                    fontSize: "24px",
+                    minHeight: "60px"
+                  }}
+                >
+                  {event.name}
+                </h3>
 
                 <p>📅 {event.date}</p>
 
                 <p>📍 {event.venue}</p>
 
-                <p className="price">
-                    ₹{event.price}
+                <p
+                  style={{
+                    color: "#10b981",
+                    fontSize: "24px",
+                    fontWeight: "bold"
+                  }}
+                >
+                  ₹{event.price}
                 </p>
 
                 <Link to={`/event/${event.id}`}>
-                    <button className="details-btn">
+                  <button className="details-btn">
                     View Details
-                    </button>
+                  </button>
                 </Link>
-
-                </div>
+              </div>
             </div>
           ))}
         </div>
       )}
+
       <Footer />
     </>
   );
