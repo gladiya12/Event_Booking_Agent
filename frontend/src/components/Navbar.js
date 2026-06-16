@@ -56,16 +56,34 @@ useEffect(() => {
       }}
     >
       <Link
-        to="/"
-        style={{
-          color: "white",
-          textDecoration: "none",
-          fontSize: "28px",
-          fontWeight: "700"
-        }}
-      >
-        🎟 EventHub
-      </Link>
+  to="/"
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    textDecoration: "none"
+  }}
+>
+  <img
+    src="/Event Hub.png"
+    alt="EventHub Logo"
+    style={{
+      width: "40px",
+      height: "40px",
+      objectFit: "contain"
+    }}
+  />
+
+  <span
+    style={{
+      color: "white",
+      fontSize: "28px",
+      fontWeight: "700"
+    }}
+  >
+    EventHub
+  </span>
+</Link>
 
       <div
         style={{

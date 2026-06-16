@@ -22,6 +22,8 @@ function Payment() {
 
     const currentUser =
     localStorage.getItem("currentUser");
+    const [isProcessing, setIsProcessing] =
+  useState(false);
 
     if (!currentUser) {
     navigate("/login");
@@ -64,7 +66,10 @@ function Payment() {
     convenienceFee +
     gst;
 
-  const handlePayment = () => {
+ const handlePayment = () => {
+  setIsProcessing(true);
+
+  setTimeout(() => {
   const booking = {
   bookingId,
   event,
@@ -73,7 +78,8 @@ function Payment() {
   selectedDate,
   selectedTime,
   bookingDate: new Date().toISOString(),
-  status: "Confirmed"
+  paymentStatus: "Paid",
+  status: "Confirmed",
 };
 
   const existingBookings =
@@ -88,16 +94,35 @@ function Payment() {
     JSON.stringify(existingBookings)
   );
 
+  // SAVE OCCUPIED SEATS
+  const existingOccupiedSeats =
+    JSON.parse(
+      localStorage.getItem(
+        `occupiedSeats_${event.id}`
+      )
+    ) || [];
+
+  const updatedOccupiedSeats = [
+    ...existingOccupiedSeats,
+    ...seats,
+  ];
+
+  localStorage.setItem(
+    `occupiedSeats_${event.id}`,
+    JSON.stringify(updatedOccupiedSeats)
+  );
+
   navigate("/booking-success", {
-  state: {
-    event,
-    seats,
-    total,
-    bookingId,
-    selectedDate,
-    selectedTime
-  }
-});
+    state: {
+      event,
+      seats,
+      total,
+      bookingId,
+      selectedDate,
+      selectedTime,
+    },
+  });
+  }, 2000);
 };
 
   return (
@@ -526,25 +551,31 @@ function Payment() {
                 ⏰ Complete payment
                 in 09:58
               </p>
-
+            
               <button
-                onClick={handlePayment}
-                style={{
-                    width: "100%",
-                    marginTop: "25px",
-                    padding: "18px",
-                    border: "none",
-                    borderRadius: "12px",
-                    background:
-                    "linear-gradient(135deg,#7c3aed,#a855f7)",
-                    color: "white",
-                    fontSize: "20px",
-                    fontWeight: "700",
-                    cursor: "pointer"
-                }}
-                >
-                Pay Now →
-                </button>
+  onClick={handlePayment}
+  disabled={isProcessing}
+  style={{
+    width: "100%",
+    marginTop: "25px",
+    padding: "18px",
+    border: "none",
+    borderRadius: "12px",
+    background:
+      "linear-gradient(135deg,#7c3aed,#a855f7)",
+    color: "white",
+    fontSize: "20px",
+    fontWeight: "700",
+    cursor: isProcessing
+      ? "not-allowed"
+      : "pointer",
+    opacity: isProcessing ? 0.7 : 1,
+  }}
+>
+  {isProcessing
+    ? "Processing Payment..."
+    : "Pay Now →"}
+</button>
             </div>
           </div>
         </div>

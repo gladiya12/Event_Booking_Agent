@@ -4,11 +4,13 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 function SeatSelection() {
+  const isDark =
+  localStorage.getItem("theme") === "dark";
   const navigate = useNavigate();
   const location = useLocation();
 
   const [selectedSeats, setSelectedSeats] = useState([]);
-
+  const [ticketCount, setTicketCount] = useState(1);
   useEffect(() => {
     const currentUser = localStorage.getItem("currentUser");
 
@@ -22,6 +24,7 @@ function SeatSelection() {
   const selectedTime = location.state?.selectedTime;
 
   if (!event) {
+    
     return (
       <>
         <Navbar />
@@ -57,147 +60,241 @@ function SeatSelection() {
     );
   }
 
-  const occupiedSeats = [
-    "A5",
-    "A6",
-    "B8",
-    "C4",
-    "C5",
-    "D10",
-    "E11",
-    "F3",
-    "G7",
-    "H8",
-    "J5",
-    "K13",
-  ];
+  const defaultOccupiedSeats = [
+  "A5",
+  "A6",
+  "B8",
+  "C4",
+  "C5",
+  "D10",
+  "E11",
+  "F3",
+  "G7",
+  "H8",
+  "J5",
+  "K13",
+];
 
-  const VIP_ROWS = ["A", "B"];
-  const PREMIUM_ROWS = ["C", "D", "E", "F"];
-  const STANDARD_ROWS = ["G", "H", "J", "K", "L"];
+const occupiedSeats = [
+  ...defaultOccupiedSeats,
+  ...(
+    JSON.parse(
+      localStorage.getItem(
+        `occupiedSeats_${event.id}`
+      )
+    ) || []
+  ),
+];
+  const VIP_ROWS = ["A", "B", "C", "D"];
+  const PREMIUM_ROWS = ["E", "F", "G", "H"];
+  const STANDARD_ROWS = ["I", "J", "K", "L", "M", "N", "O"];
 
   const generateSeats = (row, count) => {
     return Array.from({ length: count }, (_, i) => `${row}${i + 1}`);
   };
 
   const handleSeatClick = (seat) => {
-    if (occupiedSeats.includes(seat)) return;
+  const row = seat.charAt(0);
+  const startSeat = parseInt(
+    seat.slice(1)
+  );
 
-    if (selectedSeats.includes(seat)) {
-      setSelectedSeats(selectedSeats.filter((s) => s !== seat));
-    } else {
-      setSelectedSeats([...selectedSeats, seat]);
+  const maxSeat =
+    VIP_ROWS.includes(row)
+      ? 22
+      : PREMIUM_ROWS.includes(row)
+      ? 18
+      : 24;
+
+  const seatsToBook = [];
+
+  for (
+    let i = 0;
+    i < ticketCount;
+    i++
+  ) {
+    const seatNo = startSeat + i;
+
+    if (seatNo > maxSeat) {
+      alert(
+        "Not enough adjacent seats available."
+      );
+      return;
     }
-  };
+
+    seatsToBook.push(
+      `${row}${seatNo}`
+    );
+  }
+
+  const invalidSeat =
+    seatsToBook.some((s) =>
+      occupiedSeats.includes(s)
+    );
+
+  if (invalidSeat) {
+    alert(
+      "Not enough adjacent seats available."
+    );
+    return;
+  }
+
+  setSelectedSeats(seatsToBook);
+};
 
   const getSeatPrice = (seat) => {
-    const row = seat.charAt(0);
+  const row = seat.charAt(0);
 
-    if (VIP_ROWS.includes(row)) return 500;
+  if (VIP_ROWS.includes(row))
+    return 500;
 
-    if (PREMIUM_ROWS.includes(row)) return 350;
+  if (PREMIUM_ROWS.includes(row))
+    return 350;
 
-    return 200;
-  };
+  return 200;
+};
 
   const totalPrice = selectedSeats.reduce(
     (sum, seat) => sum + getSeatPrice(seat),
     0
   );
 
-  const renderSection = (rows, seatCount, title, price) => (
-    <>
-      <h3
-        style={{
-          textAlign: "center",
-          margin: "35px 0 20px",
-          color: "#111827",
-          fontSize: "24px",
-        }}
-      >
-        {title} ₹{price}
-      </h3>
+  const renderSeat = (seat) => {
+  const isOccupied =
+    occupiedSeats.includes(seat);
 
-      {rows.map((row) => (
-        <div
-          key={row}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: "8px",
-            marginBottom: "12px",
-          }}
-        >
-          {generateSeats(row, seatCount / 2).map((seat, index) => {
-            const isOccupied = occupiedSeats.includes(seat);
-            const isSelected = selectedSeats.includes(seat);
+  const isSelected =
+    selectedSeats.includes(seat);
 
-            return (
-              <button
-                key={seat}
-                onClick={() => handleSeatClick(seat)}
-                disabled={isOccupied}
-                style={{
-                  width: "42px",
-                  height: "42px",
-                  borderRadius: "6px",
-                  border: "1px solid #cbd5e1",
-                  background: isOccupied
-                    ? "#d1d5db"
-                    : isSelected
-                    ? "#22c55e"
-                    : "#fff",
-                  cursor: isOccupied ? "not-allowed" : "pointer",
-                }}
-              >
-                {index + 1}
-              </button>
-            );
-          })}
+  return (
+    <button
+      key={seat}
+      onClick={() => handleSeatClick(seat)}
+      disabled={isOccupied}
+      style={{
+        width: "38px",
+        height: "38px",
+        borderRadius: "4px",
+        border: "1px solid #cbd5e1",
+        background: isOccupied
+  ? "#9ca3af"      // Grey
+  : isSelected
+  ? "#22c55e"      // Green
+  : "#ffffff",     // White
 
-          <div style={{ width: "50px" }} />
+color: isOccupied
+  ? "#ffffff"
+  : "#111827",
 
-          {generateSeats(row, seatCount / 2).map((seat, index) => {
-            const seatNo = seatCount / 2 + index + 1;
-            const fullSeat = row + seatNo;
-
-            const isOccupied = occupiedSeats.includes(fullSeat);
-            const isSelected = selectedSeats.includes(fullSeat);
-
-            return (
-              <button
-                key={fullSeat}
-                onClick={() => handleSeatClick(fullSeat)}
-                disabled={isOccupied}
-                style={{
-                  width: "42px",
-                  height: "42px",
-                  borderRadius: "6px",
-                  border: "1px solid #cbd5e1",
-                  background: isOccupied
-                    ? "#d1d5db"
-                    : isSelected
-                    ? "#22c55e"
-                    : "#fff",
-                  cursor: isOccupied ? "not-allowed" : "pointer",
-                }}
-              >
-                {seatNo}
-              </button>
-            );
-          })}
-        </div>
-      ))}
-    </>
+border: isOccupied
+  ? "1px solid #9ca3af"
+  : isSelected
+  ? "1px solid #22c55e"
+  : "1px solid #cbd5e1",
+        cursor: isOccupied
+          ? "not-allowed"
+          : "pointer",
+        fontSize: "12px",
+      }}
+    >
+      {seat.slice(1)}
+    </button>
   );
+};
+  const renderCinemaRows = (
+  rows,
+  leftSeats,
+  centerSeats,
+  rightSeats,
+  title,
+  price
+) => (
+  <>
+    <div
+  style={{
+    borderTop: "1px solid #d1d5db",
+    marginTop: "30px",
+    paddingTop: "20px",
+  }}
+>
+  <h3
+    style={{
+      textAlign: "center",
+      marginBottom: "20px",
+      color: "#374151",
+    }}
+  >
+    ₹{price} {title}
+  </h3>
+</div>
 
+    {rows.map((row) => (
+  <div
+    key={row}
+    style={{
+      display: "flex",
+      alignItems: "center",
+      marginBottom: "10px",
+    }}
+  >
+    {/* Row Label */}
+    <div
+      style={{
+        width: "40px",
+        fontWeight: "bold",
+        fontSize: "18px",
+      }}
+    >
+      {row}
+    </div>
+
+    {/* Seat Blocks */}
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        gap: "40px",
+      }}
+    >
+      {/* LEFT BLOCK */}
+      <div style={{ display: "flex", gap: "6px" }}>
+        {Array.from(
+          { length: leftSeats },
+          (_, i) => `${row}${i + 1}`
+        ).map(renderSeat)}
+      </div>
+
+      {/* CENTER BLOCK */}
+      <div style={{ display: "flex", gap: "6px" }}>
+        {Array.from(
+          { length: centerSeats },
+          (_, i) =>
+            `${row}${i + leftSeats + 1}`
+        ).map(renderSeat)}
+      </div>
+
+      {/* RIGHT BLOCK */}
+      <div style={{ display: "flex", gap: "6px" }}>
+        {Array.from(
+          { length: rightSeats },
+          (_, i) =>
+            `${row}${i + leftSeats + centerSeats + 1}`
+        ).map(renderSeat)}
+      </div>
+    </div>
+  </div>
+))}
+  </>
+);
   return (
     <>
       <Navbar />
 
       <div
         style={{
-          background: "#f1f5f9",
+          background: isDark
+            ? "#0f172a"
+            : "#f1f5f9",
           minHeight: "100vh",
           padding: "40px 20px",
         }}
@@ -213,17 +310,20 @@ function SeatSelection() {
         </h1>
 
         <div
-          style={{
-            display: "flex",
-            gap: "30px",
-            maxWidth: "1600px",
-            margin: "0 auto",
-          }}
-        >
+  style={{
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "30px",
+    maxWidth: "1600px",
+    margin: "0 auto",
+  }}
+>
           <div
             style={{
-              flex: 2,
-              background: "#fff",
+              flex: 3,
+              background: isDark
+                ? "#1e293b"
+                : "#ffffff",
               borderRadius: "20px",
               padding: "40px",
             }}
@@ -242,20 +342,56 @@ function SeatSelection() {
                   borderRadius: "100% 100% 0 0",
                 }}
               />
-              <h2>SCREEN</h2>
+              <h2
+  style={{
+    color: isDark
+      ? "#ffffff"
+      : "#111827",
+  }}
+>
+  SCREEN
+</h2>
             </div>
 
-            {renderSection(VIP_ROWS, 16, "VIP", 500)}
-            {renderSection(PREMIUM_ROWS, 18, "PREMIUM", 350)}
-            {renderSection(STANDARD_ROWS, 20, "STANDARD", 200)}
+           {renderCinemaRows(
+  VIP_ROWS,
+  4,
+  14,
+  4,
+  "VIP",
+  500
+)}
+
+{renderCinemaRows(
+  PREMIUM_ROWS,
+  5,
+  8,
+  5,
+  "Premium",
+  350
+)}
+
+{renderCinemaRows(
+  STANDARD_ROWS,
+  5,
+  14,
+  5,
+  "First Class",
+  200
+)}
           </div>
 
           <div
             style={{
-              width: "400px",
-              background: "#fff",
-              borderRadius: "20px",
-              padding: "30px",
+             width: "380px",
+background: "#fff",
+borderRadius: "20px",
+padding: "30px",
+position: "sticky",
+top: "100px",
+height: "fit-content",
+boxShadow:
+  "0 5px 20px rgba(0,0,0,0.08)",
             }}
           >
             <h2>{event.name}</h2>
@@ -265,7 +401,88 @@ function SeatSelection() {
             <p>📍 {event.venue}</p>
 
             <hr />
+            <h3>Select Number of Tickets</h3>
 
+<select
+  value={ticketCount}
+  onChange={(e) =>
+    setTicketCount(Number(e.target.value))
+  }
+  style={{
+    width: "100%",
+    padding: "12px",
+    marginBottom: "20px",
+    borderRadius: "10px",
+    border: "1px solid #cbd5e1",
+  }}
+>
+  {Array.from({ length: 10 }, (_, i) => (
+    <option
+      key={i + 1}
+      value={i + 1}
+    >
+      {i + 1} Tickets
+    </option>
+  ))}
+</select>
+<div
+  style={{
+    display: "flex",
+    justifyContent: "center",
+    gap: "30px",
+    marginTop: "40px",
+  }}
+>
+  <div
+  style={{
+    display: "flex",
+    justifyContent: "center",
+    gap: "40px",
+    marginTop: "30px",
+    marginBottom: "20px",
+  }}
+>
+  <div>
+    <span
+      style={{
+        display: "inline-block",
+        width: "16px",
+        height: "16px",
+        background: "#ffffff",
+        border: "1px solid #cbd5e1",
+        marginRight: "8px",
+      }}
+    />
+    Available
+  </div>
+
+  <div>
+    <span
+      style={{
+        display: "inline-block",
+        width: "16px",
+        height: "16px",
+        background: "#22c55e",
+        marginRight: "8px",
+      }}
+    />
+    Selected
+  </div>
+
+  <div>
+    <span
+      style={{
+        display: "inline-block",
+        width: "16px",
+        height: "16px",
+        background: "#9ca3af",
+        marginRight: "8px",
+      }}
+    />
+    Occupied
+  </div>
+</div>
+</div>
             <h3>Selected Seats</h3>
 
             <p>

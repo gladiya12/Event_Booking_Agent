@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import QRCode from "react-qr-code";
-
+import { jsPDF } from "jspdf";
 function BookingSuccess() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -82,7 +82,46 @@ function BookingSuccess() {
       </>
     );
   }
+  const downloadTicket = () => {
+  const doc = new jsPDF();
 
+  doc.setFontSize(22);
+  doc.text("EventHub Ticket", 20, 20);
+
+  doc.setFontSize(14);
+  doc.text(`Event: ${event.name}`, 20, 40);
+  doc.text(`Date: ${selectedDate}`, 20, 50);
+  doc.text(`Time: ${selectedTime}`, 20, 60);
+  doc.text(`Venue: ${event.venue}`, 20, 70);
+
+  doc.text(
+    `Seats: ${seats.join(", ")}`,
+    20,
+    80
+  );
+
+  doc.text(
+    `Booking ID: ${bookingId}`,
+    20,
+    90
+  );
+
+  doc.text(
+    `Ticket No: ${ticketNo}`,
+    20,
+    100
+  );
+
+  doc.text(
+    `Total Paid: ₹${total}`,
+    20,
+    110
+  );
+
+  doc.save(
+    `${bookingId}.pdf`
+  );
+};
   return (
     <>
       <Navbar />
@@ -329,7 +368,7 @@ Ticket:${ticketNo}
                     color: "#64748b"
                   }}
                 >
-                  Show this QR code at entry
+                  🎟 Present this QR code at the venue entrance for ticket verification.
                 </p>
               </div>
 
@@ -374,21 +413,20 @@ Ticket:${ticketNo}
                 }}
               >
                 <button
-                  style={{
-                    padding:
-                      "16px 28px",
-                    border: "none",
-                    borderRadius:
-                      "12px",
-                    background:
-                      "linear-gradient(135deg,#7c3aed,#a855f7)",
-                    color: "white",
-                    fontWeight: "600",
-                    cursor: "pointer"
-                  }}
-                >
-                  📥 Download Ticket
-                </button>
+  onClick={downloadTicket}
+  style={{
+    padding: "16px 28px",
+    border: "none",
+    borderRadius: "12px",
+    background:
+      "linear-gradient(135deg,#7c3aed,#a855f7)",
+    color: "white",
+    fontWeight: "600",
+    cursor: "pointer"
+  }}
+>
+  📥 Download Ticket
+</button>
 
                 <button
                   onClick={() =>

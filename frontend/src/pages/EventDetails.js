@@ -15,7 +15,7 @@ function EventDetails() {
 
   const [selectedTime, setSelectedTime] =
     useState("");
-
+    const totalSeats = 328;
   useEffect(() => {
     fetch(`http://127.0.0.1:5000/events/${id}`)
       .then((response) => response.json())
@@ -35,21 +35,30 @@ function EventDetails() {
   }, [id]);
 
   if (!event) {
-    return (
-      <>
-        <Navbar />
-        <h2
-          style={{
-            textAlign: "center",
-            marginTop: "100px"
-          }}
-        >
-          Loading...
-        </h2>
-      </>
-    );
-  }
+  return (
+    <>
+      <Navbar />
+      <h2
+        style={{
+          textAlign: "center",
+          marginTop: "100px"
+        }}
+      >
+        Loading...
+      </h2>
+    </>
+  );
+}
 
+const occupiedSeats =
+  JSON.parse(
+    localStorage.getItem(
+      `occupiedSeats_${event.id}`
+    )
+  ) || [];
+
+const seatsLeft =
+  totalSeats - occupiedSeats.length;
   return (
     <>
       <Navbar />
@@ -462,14 +471,29 @@ function EventDetails() {
               </ul>
 
               <p
-                style={{
-                  color: "#ef4444",
-                  fontWeight: "bold",
-                  marginTop: "20px"
-                }}
-              >
-                Only 20 Seats Left
-              </p>
+  style={{
+    color:
+      seatsLeft < 50
+        ? "#ef4444"
+        : "#16a34a",
+    fontWeight: "bold",
+    marginTop: "20px"
+  }}
+>
+  {seatsLeft < 50
+    ? `🔥 Fast Filling - Only ${seatsLeft} Seats Left`
+    : `${seatsLeft} Seats Available`}
+    
+</p>
+<p
+  style={{
+    color: "#64748b",
+    fontSize: "14px",
+    marginTop: "5px"
+  }}
+>
+  {occupiedSeats.length} seats already booked
+</p>
 
               <div
                 style={{
