@@ -12,6 +12,90 @@ function Register() {
   const location = useLocation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleRegister = async () => {
+
+  if (
+    !name ||
+    !email ||
+    !password
+  ) {
+    alert("Fill all fields");
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    alert("Passwords do not match");
+    return;
+  }
+
+  try {
+
+    const response = await fetch(
+      "http://127.0.0.1:5000/register",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password
+        })
+      }
+    );
+
+    const data =
+      await response.json();
+
+    if (!response.ok) {
+      alert(data.message);
+      return;
+    }
+
+    localStorage.setItem(
+  "currentUser",
+  JSON.stringify({
+    name,
+    email
+  })
+);
+
+alert(
+  "Registration Successful"
+);
+
+const redirectTo =
+  location.state?.redirectTo;
+
+const bookingData =
+  location.state?.bookingData;
+
+if (
+  redirectTo === "/seat-selection"
+) {
+  navigate("/seat-selection", {
+    state: bookingData
+  });
+} else {
+  navigate("/");
+}
+
+window.location.reload();
+  } catch (error) {
+
+    alert(
+      "Backend connection failed"
+    );
+
+    console.error(error);
+  }
+};
+
   return (
     <>
       <Navbar />
@@ -79,67 +163,45 @@ function Register() {
           {/* Inputs */}
 
           <input
-  type="text"
-  placeholder="Full Name"
-  value={name}
-  onChange={(e) =>
-    setName(e.target.value)
-  }
-  style={inputStyle}
-/>
+            type="text"
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) =>
+              setName(e.target.value)
+            }
+            style={inputStyle}
+          />
 
           <input
-  type="email"
-  placeholder="Email Address"
-  value={email}
-  onChange={(e) =>
-    setEmail(e.target.value)
-  }
-  style={inputStyle}
-/>
+            type="email"
+            placeholder="Email Address"
+            value={email}
+            onChange={(e) =>
+              setEmail(e.target.value)
+            }
+            style={inputStyle}
+          />
 
           <input
             type="password"
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             style={inputStyle}
           />
 
           <input
             type="password"
             placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
             style={inputStyle}
           />
 
           {/* Button */}
 
           <button
-            onClick={() => {
-  localStorage.setItem(
-    "currentUser",
-    JSON.stringify({
-      name,
-      email
-    })
-  );
-
-  const redirectTo =
-    location.state?.redirectTo;
-
-  const bookingData =
-    location.state?.bookingData;
-
-  if (
-    redirectTo === "/seat-selection"
-  ) {
-    navigate("/seat-selection", {
-      state: bookingData
-    });
-  } else {
-    navigate("/");
-  }
-
-  window.location.reload();
-}}
+            onClick={handleRegister}
             style={{
               width: "100%",
               padding: "17px",

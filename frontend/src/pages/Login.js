@@ -8,7 +8,72 @@ function Login() {
   const location = useLocation();
   const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
+const handleLogin = async () => {
 
+  if (!email || !password) {
+    alert("Fill all fields");
+    return;
+  }
+
+  try {
+
+    const response = await fetch(
+      "http://127.0.0.1:5000/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
+        body: JSON.stringify({
+          email,
+          password
+        })
+      }
+    );
+
+    const data =
+      await response.json();
+
+    if (!response.ok) {
+      alert(data.message);
+      return;
+    }
+
+    localStorage.setItem(
+      "currentUser",
+      JSON.stringify(data.user)
+    );
+
+    alert("Login Successful");
+
+    const redirectTo =
+      location.state?.redirectTo;
+
+    const bookingData =
+      location.state?.bookingData;
+
+    if (
+      redirectTo === "/seat-selection"
+    ) {
+      navigate("/seat-selection", {
+        state: bookingData
+      });
+    } else {
+      navigate("/");
+    }
+
+    window.location.reload();
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      "Backend Connection Failed"
+    );
+  }
+};
   return (
     <>
       <Navbar />
@@ -84,33 +149,7 @@ const [password, setPassword] = useState("");
 />
 
           <button
-           onClick={() => {
-  localStorage.setItem(
-    "currentUser",
-    JSON.stringify({
-      name: email.split("@")[0],
-      email: email
-    })
-  );
-
-  const redirectTo =
-    location.state?.redirectTo;
-
-  const bookingData =
-    location.state?.bookingData;
-
-  if (
-    redirectTo === "/seat-selection"
-  ) {
-    navigate("/seat-selection", {
-      state: bookingData
-    });
-  } else {
-    navigate("/");
-  }
-
-  window.location.reload();
-}}
+           onClick={handleLogin}
             style={{
               width: "100%",
               padding: "15px",
