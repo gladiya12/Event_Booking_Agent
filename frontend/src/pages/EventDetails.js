@@ -355,7 +355,7 @@ const seatsLeft =
                   marginBottom: "25px"
                 }}
               >
-                🎟 Entry Pass Included
+                 Entry Pass Included
               </p>
 
               <h3
@@ -365,7 +365,7 @@ const seatsLeft =
                   color: "#0f172a"
                 }}
               >
-                📅 Select Date
+                 Select Date
               </h3>
 
               <div

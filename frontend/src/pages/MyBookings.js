@@ -20,6 +20,20 @@ function MyBookings() {
     (sum, booking) => sum + (booking.total || 0),
     0
   );
+  const cancelBooking = (bookingId) => {
+  const updatedBookings = bookings.filter(
+    (booking) => booking.bookingId !== bookingId
+  );
+
+  localStorage.setItem(
+    "eventBookings",
+    JSON.stringify(updatedBookings)
+  );
+
+  setBookings(updatedBookings);
+
+  alert("Booking Cancelled");
+};
 
   return (
     <>
@@ -52,7 +66,7 @@ function MyBookings() {
                 marginBottom: "10px"
               }}
             >
-              📋 My Bookings
+              My Bookings
             </h1>
 
             <p
@@ -386,7 +400,23 @@ function MyBookings() {
                             "pointer"
                         }}
                       >
-                        🎟 View Ticket
+                        View Ticket
+                      </button>
+                      <button
+                        onClick={() => cancelBooking(booking.bookingId)}
+                        style={{
+                          width: "100%",
+                          marginTop: "10px",
+                          padding: "14px",
+                          border: "none",
+                          borderRadius: "12px",
+                          background: "#ef4444",
+                          color: "white",
+                          fontWeight: "600",
+                          cursor: "pointer"
+                        }}
+                      >
+                        Cancel Booking
                       </button>
                     </div>
                   </div>

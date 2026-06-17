@@ -9,7 +9,7 @@ function Footer() {
         marginTop: "50px"
       }}
     >
-      <h3>🎟 Event Booking Agent</h3>
+      <h3>Event Booking Agent</h3>
 
       <p>
         Book workshops, concerts and business events easily.

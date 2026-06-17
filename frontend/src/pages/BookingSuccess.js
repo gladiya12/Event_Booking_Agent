@@ -1,7 +1,9 @@
 import { useNavigate, useLocation } from "react-router-dom";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import QRCode from "react-qr-code";
 import { jsPDF } from "jspdf";
+
 function BookingSuccess() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -9,7 +11,7 @@ function BookingSuccess() {
   const event = location.state?.event;
   const seats = location.state?.seats || [];
   const total = location.state?.total || 0;
-
+  const [rating, setRating] = useState(0);
   const selectedDate =
     location.state?.selectedDate ||
     event?.date ||
@@ -222,7 +224,7 @@ function BookingSuccess() {
                   marginBottom: "10px"
                 }}
               >
-                🎟 {event.name}
+                 {event.name}
               </h1>
 
               <div
@@ -368,7 +370,7 @@ Ticket:${ticketNo}
                     color: "#64748b"
                   }}
                 >
-                  🎟 Present this QR code at the venue entrance for ticket verification.
+                   Present this QR code at the venue entrance for ticket verification.
                 </p>
               </div>
 
@@ -383,9 +385,45 @@ Ticket:${ticketNo}
               >
                 <h3>
                   🎉 Thank you for booking
-                  with EventHub AI
+                  with EventHub
                 </h3>
+                <div
+                  style={{
+                    marginTop: "25px",
+                    textAlign: "center"
+                  }}
+                >
+                  <h3>Rate This Event</h3>
 
+                  {[1,2,3,4,5].map((star) => (
+                    <span
+                      key={star}
+                      onClick={() => setRating(star)}
+                      style={{
+                        fontSize: "35px",
+                        cursor: "pointer",
+                        color:
+                          star <= rating
+                            ? "#facc15"
+                            : "#d1d5db"
+                      }}
+                    >
+                      ★
+                    </span>
+                  ))}
+
+                  {rating > 0 && (
+                    <p
+                      style={{
+                        marginTop: "10px",
+                        color: "#16a34a",
+                        fontWeight: "600"
+                      }}
+                    >
+                      Thanks for rating {rating}/5
+                    </p>
+                  )}
+                </div>
                 <p>
                   • Please arrive 30 minutes
                   before the event.
@@ -425,7 +463,7 @@ Ticket:${ticketNo}
     cursor: "pointer"
   }}
 >
-  📥 Download Ticket
+  Download Ticket
 </button>
 
                 <button
@@ -446,7 +484,7 @@ Ticket:${ticketNo}
                     cursor: "pointer"
                   }}
                 >
-                  📋 My Bookings
+                  My Bookings
                 </button>
 
                 <button
@@ -465,7 +503,7 @@ Ticket:${ticketNo}
                     cursor: "pointer"
                   }}
                 >
-                  🏠 Home
+                  Home
                 </button>
               </div>
             </div>
