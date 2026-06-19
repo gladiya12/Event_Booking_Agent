@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Swal from "sweetalert2";
 
 function SeatSelection() {
   const isDark =
@@ -116,9 +117,12 @@ const occupiedSeats = [
     const seatNo = startSeat + i;
 
     if (seatNo > maxSeat) {
-      alert(
-        "Not enough adjacent seats available."
-      );
+      Swal.fire({
+        icon: "warning",
+        title: "Seats Unavailable",
+        text: "Not enough adjacent seats available.",
+        confirmButtonColor: "#7c3aed"
+      });
       return;
     }
 
@@ -133,9 +137,12 @@ const occupiedSeats = [
     );
 
   if (invalidSeat) {
-    alert(
-      "Not enough adjacent seats available."
-    );
+    Swal.fire({
+      icon: "warning",
+      title: "Seats Unavailable",
+      text: "Not enough adjacent seats available.",
+      confirmButtonColor: "#7c3aed"
+    });
     return;
   }
 

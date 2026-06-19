@@ -2,37 +2,68 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Swal from "sweetalert2";
 
 function MyBookings() {
   const navigate = useNavigate();
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    const data =
-      JSON.parse(
-        localStorage.getItem("eventBookings")
-      ) || [];
 
-    setBookings(data.reverse());
-  }, []);
+  const currentUser =
+    JSON.parse(
+      localStorage.getItem("currentUser")
+    );
+
+  if (!currentUser) return;
+
+  fetch(
+    `http://127.0.0.1:5000/my-bookings/${currentUser.id}`
+  )
+    .then((response) =>
+      response.json()
+    )
+    .then((data) => {
+      setBookings(data);
+    });
+
+}, []);
 
   const totalSpent = bookings.reduce(
-    (sum, booking) => sum + (booking.total || 0),
-    0
-  );
-  const cancelBooking = (bookingId) => {
-  const updatedBookings = bookings.filter(
-    (booking) => booking.bookingId !== bookingId
+  (sum, booking) =>
+    sum + Number(booking.total_amount || 0),
+  0
+);
+  const cancelBooking = async (bookingId) => {
+
+  const confirmCancel =
+    window.confirm(
+      "Are you sure you want to cancel this booking?"
+    );
+
+  if (!confirmCancel) return;
+
+  await fetch(
+    `http://127.0.0.1:5000/cancel-booking/${bookingId}`,
+    {
+      method: "DELETE",
+    }
   );
 
-  localStorage.setItem(
-    "eventBookings",
-    JSON.stringify(updatedBookings)
-  );
+  const updatedBookings =
+    bookings.filter(
+      (booking) =>
+        booking.booking_id !== bookingId
+    );
 
   setBookings(updatedBookings);
 
-  alert("Booking Cancelled");
+  Swal.fire({
+    icon: "success",
+    title: "Booking Cancelled",
+    text: "Your booking has been cancelled successfully.",
+    confirmButtonColor: "#7c3aed"
+  });
 };
 
   return (
@@ -241,10 +272,10 @@ function MyBookings() {
                     {/* EVENT IMAGE */}
                     <img
                       src={
-                        booking.event?.image
+                        booking.event_image
                       }
                       alt={
-                        booking.event?.name
+                        booking.event_name
                       }
                       style={{
                         width: "100%",
@@ -265,31 +296,22 @@ function MyBookings() {
                         }}
                       >
                         {
-                          booking.event
-                            ?.name
+                         booking.event_name
                         }
                       </h2>
 
                       <p>
-                        📅{" "}
-                        {
-                          booking.event
-                            ?.date
-                        }
-                      </p>
-                      <p>
-                        📆 {booking.selectedDate}
+                        📆 {booking.selected_date}
                       </p>
 
                       <p>
-                        🕒 {booking.selectedTime}
+                        🕒 {booking.selected_time}
                       </p>
 
                       <p>
                         📍{" "}
                         {
-                          booking.event
-                            ?.venue
+                          booking.event_venue
                         }
                       </p>
 
@@ -305,17 +327,13 @@ function MyBookings() {
                           Booking ID:
                         </strong>{" "}
                         {
-                          booking.bookingId
+                          booking.booking_id
                         }
                       </p>
 
                       <p>
-                        <strong>
-                          Seats:
-                        </strong>{" "}
-                        {booking.seats?.join(
-                          ", "
-                        )}
+                        <strong>Seats:</strong>{" "}
+                        {booking.seats}
                       </p>
 
                       <div
@@ -344,7 +362,7 @@ function MyBookings() {
                               "600"
                           }}
                         >
-                          Confirmed
+                          {booking.status}
                         </span>
 
                         <span
@@ -359,7 +377,7 @@ function MyBookings() {
                         >
                           ₹
                           {
-                            booking.total
+                            booking.total_amount
                           }
                         </span>
                       </div>
@@ -368,12 +386,17 @@ function MyBookings() {
                         onClick={() =>
                           navigate("/booking-success", {
                             state: {
-                              event: booking.event,
-                              seats: booking.seats,
-                              total: booking.total,
-                              bookingId: booking.bookingId,
-                              selectedDate: booking.selectedDate,
-                              selectedTime: booking.selectedTime
+                              event: {
+                                id: booking.event_id,
+                                name: booking.event_name,
+                                image: booking.event_image,
+                                venue: booking.event_venue
+                              },
+                              seats: booking.seats.split(","),
+                              total: booking.total_amount,
+                              bookingId: booking.booking_id,
+                              selectedDate: booking.selected_date,
+                              selectedTime: booking.selected_time
                             }
                           })
                         }
@@ -403,7 +426,32 @@ function MyBookings() {
                         View Ticket
                       </button>
                       <button
-                        onClick={() => cancelBooking(booking.bookingId)}
+                        onClick={() =>
+                          navigate("/rate-event", {
+                            state: {
+                              event: {
+                                id: booking.event_id,
+                                name:
+                                  booking.event_name
+                              }
+                            }
+                          })
+                        }
+                        style={{
+                          width: "100%",
+                          marginTop: "10px",
+                          padding: "14px",
+                          border: "none",
+                          borderRadius: "12px",
+                          background: "#10b981",
+                          color: "white",
+                          cursor: "pointer"
+                        }}
+                      >
+                        ⭐ Rate Event
+                      </button>
+                      <button
+                        onClick={() => cancelBooking(booking.booking_id)}
                         style={{
                           width: "100%",
                           marginTop: "10px",

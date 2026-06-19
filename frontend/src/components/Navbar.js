@@ -4,6 +4,10 @@ import { FaUserCircle } from "react-icons/fa";
 function Navbar() {
   const navigate = useNavigate();
 
+  const currentUser = JSON.parse(
+    localStorage.getItem("currentUser")
+  );
+
   const [theme, setTheme] = useState(
   localStorage.getItem("theme") || "light"
 );
@@ -102,25 +106,17 @@ useEffect(() => {
           Home
         </Link>
 
-        <Link
-          to="/my-bookings"
-          style={{
-            color: "white",
-            textDecoration: "none"
-          }}
-        >
-          My Bookings
-        </Link>
-
-        <Link
-          to="/profile"
-          style={{
-            color: "white",
-            textDecoration: "none"
-          }}
-        >
-          Profile
-        </Link>
+        {user && (
+          <Link
+            to="/my-bookings"
+            style={{
+              color: "white",
+              textDecoration: "none"
+            }}
+          >
+            My Bookings
+          </Link>
+        )}
 
         {!user ? (
           <>
@@ -153,18 +149,21 @@ useEffect(() => {
           </>
         ) : (
           <>
-            <div
-  style={{
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    color: "white"
-  }}
->
-  <FaUserCircle size={28} />
-  <span>{user.name}</span>
-</div>
-            <button
+           <Link
+              to="/profile"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                color: "white",
+                textDecoration: "none",
+                fontWeight: "600"
+              }}
+            >
+              <FaUserCircle size={28} />
+              <span>{user.name}</span>
+            </Link>
+                        <button
               onClick={() =>
                 setTheme(
                   theme === "light"

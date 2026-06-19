@@ -12,15 +12,15 @@ function EventDetails() {
   const navigate = useNavigate();
 
   const [event, setEvent] = useState(null);
+  const [rating, setRating] = useState(null);
+  const [reviews, setReviews] = useState([]);
   const [relatedEvents, setRelatedEvents] = useState([]);
   const location = useLocation();
 
-  const [selectedDate, setSelectedDate] =
-    useState("");
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
+  const totalSeats = 328;
 
-  const [selectedTime, setSelectedTime] =
-    useState("");
-    const totalSeats = 328;
   useEffect(() => {
     fetch(`http://127.0.0.1:5000/events/${id}`)
       .then((response) => response.json())
@@ -37,6 +37,23 @@ function EventDetails() {
 
         setRelatedEvents(filtered);
       });
+
+    fetch(
+      `http://127.0.0.1:5000/event-rating/${id}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setRating(data);
+      });
+
+    fetch(
+      `http://127.0.0.1:5000/event-reviews/${id}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setReviews(data);
+      });
+
   }, [id]);
 
   if (!event) {
@@ -128,6 +145,20 @@ const seatsLeft =
           >
             {event.name}
           </h1>
+
+          <p
+            style={{
+              color: "#f59e0b",
+              fontSize: "18px",
+              fontWeight: "600"
+            }}
+          >
+            ⭐ {rating?.average_rating || 0}
+
+            (
+            {rating?.total_reviews || 0}
+            Reviews)
+          </p>
 
           <div
             style={{
@@ -262,6 +293,69 @@ const seatsLeft =
                 <h3>🎫 Category</h3>
                 <p>{event.category}</p>
               </div>
+            </div>
+
+            {/* REVIEWS */}
+
+            <div
+              style={{
+                background: "white",
+                padding: "35px",
+                borderRadius: "20px",
+                marginTop: "25px",
+                boxShadow: "0 5px 20px rgba(0,0,0,0.08)"
+              }}
+            >
+              <h2>
+                ⭐ Reviews ({reviews.length})
+              </h2>
+
+              {reviews.length === 0 ? (
+                <p
+                  style={{
+                    color: "#64748b",
+                    marginTop: "20px"
+                  }}
+                >
+                  No reviews yet.
+                </p>
+              ) : (
+                reviews.map((review, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      borderBottom:
+                        "1px solid #e2e8f0",
+                      padding: "15px 0"
+                    }}
+                  >
+                    <h4
+                      style={{
+                        marginBottom: "5px"
+                      }}
+                    >
+                      {review.name}
+                    </h4>
+
+                    <p
+                      style={{
+                        color: "#f59e0b",
+                        fontWeight: "600"
+                      }}
+                    >
+                      {"⭐".repeat(review.rating)}
+                    </p>
+
+                    <p
+                      style={{
+                        color: "#475569"
+                      }}
+                    >
+                      {review.review}
+                    </p>
+                  </div>
+                ))
+              )}
             </div>
 
             {/* RECOMMENDATIONS */}

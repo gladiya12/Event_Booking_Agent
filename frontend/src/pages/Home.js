@@ -3,17 +3,34 @@ import "../App.css";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import ChatBot from "../components/ChatBot";
 
 function Home() {
   const [events, setEvents] = useState([]);
+  const [ratings, setRatings] = useState({});
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
-
+  
   useEffect(() => {
     fetch("http://127.0.0.1:5000/events")
       .then((response) => response.json())
       .then((data) => {
         setEvents(data);
+
+        data.forEach(async (event) => {
+
+          const response = await fetch(
+            `http://127.0.0.1:5000/event-rating/${event.id}`
+          );
+
+          const ratingData =
+            await response.json();
+
+          setRatings(prev => ({
+            ...prev,
+            [event.id]: ratingData
+          }));
+        });
       });
   }, []);
 
@@ -181,6 +198,25 @@ function Home() {
                 >
                   {event.name}
                 </h3>
+                <div
+                  style={{
+                    color: "#f59e0b",
+                    fontWeight: "600",
+                    marginBottom: "10px"
+                  }}
+                >
+                  ⭐ {
+                    ratings[event.id]
+                      ?.average_rating || 0
+                  }
+
+                  {" "}(
+                  {
+                    ratings[event.id]
+                      ?.total_reviews || 0
+                  }
+                   Reviews)
+                </div>
 
                 <p>📅 {event.date}</p>
 
@@ -206,8 +242,9 @@ function Home() {
           ))}
         </div>
       )}
-
+      <ChatBot />
       <Footer />
+      
     </>
   );
 }

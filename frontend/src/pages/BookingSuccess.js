@@ -3,19 +3,110 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import QRCode from "react-qr-code";
 import { jsPDF } from "jspdf";
+import Swal from "sweetalert2";
 
 function BookingSuccess() {
+
   const navigate = useNavigate();
   const location = useLocation();
 
   const event = location.state?.event;
   const seats = location.state?.seats || [];
   const total = location.state?.total || 0;
+
   const [rating, setRating] = useState(0);
+  const [review, setReview] = useState("");
+  const [submitted, setSubmitted] =
+    useState(false);
+
+  const submitRating = async () => {
+
+    const user = JSON.parse(
+      localStorage.getItem("currentUser")
+    );
+
+    if (!user) {
+
+      Swal.fire({
+        icon: "warning",
+        title: "Login Required",
+        text: "Please login first",
+        confirmButtonColor: "#7c3aed"
+      });
+
+      return;
+    }
+
+    if (rating === 0) {
+
+      Swal.fire({
+        icon: "warning",
+        title: "Rating Required",
+        text: "Please select a rating",
+        confirmButtonColor: "#7c3aed"
+      });
+
+      return;
+    }
+
+    try {
+
+      const response = await fetch(
+        "http://127.0.0.1:5000/rate-event",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+          body: JSON.stringify({
+            user_id: user.id,
+            event_id: event.id,
+            rating,
+            review
+          })
+        }
+      );
+
+      const data =
+        await response.json();
+
+      if (!response.ok) {
+
+        Swal.fire({
+          icon: "warning",
+          title: "Already Reviewed",
+          text: data.message,
+          confirmButtonColor: "#7c3aed"
+        });
+
+        return;
+      }
+
+      Swal.fire({
+        icon: "success",
+        title: "Review Submitted",
+        text: data.message,
+        confirmButtonColor: "#7c3aed"
+      });
+
+      setSubmitted(true);
+
+    } catch (error) {
+
+      Swal.fire({
+        icon: "error",
+        title: "Failed",
+        text: "Failed to submit review",
+        confirmButtonColor: "#7c3aed"
+      });
+
+    }
+  };
   const selectedDate =
-    location.state?.selectedDate ||
-    event?.date ||
-    "Date Not Available";
+  location.state?.selectedDate ||
+  event?.date ||
+  "Date Not Available";
 
   const selectedTime =
     location.state?.selectedTime ||
@@ -38,49 +129,14 @@ function BookingSuccess() {
     return (
       <>
         <Navbar />
-
-        <div
+        <h2
           style={{
-            minHeight: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            background: "#f8fafc"
+            textAlign: "center",
+            marginTop: "100px"
           }}
         >
-          <div
-            style={{
-              background: "white",
-              padding: "40px",
-              borderRadius: "20px",
-              textAlign: "center",
-              boxShadow:
-                "0 10px 25px rgba(0,0,0,0.08)"
-            }}
-          >
-            <h1>No Booking Found</h1>
-
-            <p>
-              Please book an event first.
-            </p>
-
-            <button
-              onClick={() => navigate("/")}
-              style={{
-                marginTop: "20px",
-                padding: "14px 24px",
-                border: "none",
-                borderRadius: "12px",
-                background:
-                  "linear-gradient(135deg,#7c3aed,#a855f7)",
-                color: "white",
-                cursor: "pointer"
-              }}
-            >
-              Browse Events
-            </button>
-          </div>
-        </div>
+          No Booking Found
+        </h2>
       </>
     );
   }
@@ -353,13 +409,13 @@ function BookingSuccess() {
                 >
                   <QRCode
                     value={`
-Event:${event.name}
-Date:${selectedDate}
-Time:${selectedTime}
-Booking:${bookingId}
-Seats:${seats.join(",")}
-Ticket:${ticketNo}
-`}
+                      Event:${event.name}
+                      Date:${selectedDate}
+                      Time:${selectedTime}
+                      Booking:${bookingId}
+                      Seats:${seats.join(",")}
+                      Ticket:${ticketNo}
+                      `}
                     size={180}
                   />
                 </div>
@@ -393,6 +449,7 @@ Ticket:${ticketNo}
                     textAlign: "center"
                   }}
                 >
+
                   <h3>Rate This Event</h3>
 
                   {[1,2,3,4,5].map((star) => (
@@ -411,6 +468,40 @@ Ticket:${ticketNo}
                       ★
                     </span>
                   ))}
+
+                  <textarea
+                    placeholder="Write your review..."
+                    value={review}
+                    onChange={(e) =>
+                      setReview(e.target.value)
+                    }
+                    style={{
+                      width: "100%",
+                      marginTop: "15px",
+                      padding: "12px",
+                      borderRadius: "10px",
+                      border: "1px solid #cbd5e1",
+                      minHeight: "90px"
+                    }}
+                  />
+
+                  <button
+                    onClick={submitRating}
+                    disabled={submitted}
+                    style={{
+                      marginTop: "15px",
+                      padding: "12px 25px",
+                      border: "none",
+                      borderRadius: "10px",
+                      background: "#7c3aed",
+                      color: "white",
+                      cursor: "pointer"
+                    }}
+                  >
+                    {submitted
+                      ? "Rating Submitted"
+                      : "Submit Review"}
+                  </button>
 
                   {rating > 0 && (
                     <p
@@ -451,20 +542,20 @@ Ticket:${ticketNo}
                 }}
               >
                 <button
-  onClick={downloadTicket}
-  style={{
-    padding: "16px 28px",
-    border: "none",
-    borderRadius: "12px",
-    background:
-      "linear-gradient(135deg,#7c3aed,#a855f7)",
-    color: "white",
-    fontWeight: "600",
-    cursor: "pointer"
-  }}
->
-  Download Ticket
-</button>
+                  onClick={downloadTicket}
+                  style={{
+                    padding: "16px 28px",
+                    border: "none",
+                    borderRadius: "12px",
+                    background:
+                      "linear-gradient(135deg,#7c3aed,#a855f7)",
+                    color: "white",
+                    fontWeight: "600",
+                    cursor: "pointer"
+                  }}
+                >
+                  Download Ticket
+                </button>
 
                 <button
                   onClick={() =>

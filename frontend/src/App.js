@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import SeatSelection from "./pages/SeatSelection";
 import BookingSuccess from "./pages/BookingSuccess";
 import Payment from "./pages/Payment";
+import RateEvent from "./pages/RateEvent";
 
 function App() {
   return (
@@ -66,6 +67,11 @@ function App() {
         <Route
           path="/payment"
           element={<Payment />}
+        />
+
+        <Route
+          path="/rate-event"
+          element={<RateEvent />}
         />
 
       </Routes>

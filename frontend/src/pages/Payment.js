@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 function Payment() {
   const navigate = useNavigate();
@@ -66,10 +67,10 @@ function Payment() {
     convenienceFee +
     gst;
 
- const handlePayment = () => {
+ const handlePayment = async () => {
   setIsProcessing(true);
 
-  setTimeout(() => {
+  setTimeout(async () => {
   const booking = {
   bookingId,
   event,
@@ -81,6 +82,44 @@ function Payment() {
   paymentStatus: "Paid",
   status: "Confirmed",
 };
+
+const user = JSON.parse(
+  localStorage.getItem("currentUser")
+);
+
+const response = await fetch(
+  "http://127.0.0.1:5000/book-event",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type":
+        "application/json"
+    },
+    body: JSON.stringify({
+      booking_id: bookingId,
+      user_id: user.id,
+      event_id: event.id,
+      seats,
+      total_amount: total,
+      event_name: event.name,
+      event_image: event.image,
+      event_venue: event.venue,
+      selected_date: selectedDate,
+      selected_time: selectedTime
+    })
+  }
+);
+
+if (!response.ok) {
+  Swal.fire({
+    icon: "error",
+    title: "Booking Failed",
+    text: "Failed to book the event.",
+    confirmButtonColor: "#7c3aed"
+  });
+  setIsProcessing(false);
+  return;
+}
 
   const existingBookings =
     JSON.parse(

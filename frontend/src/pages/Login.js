@@ -2,6 +2,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 function Login() {
   const navigate = useNavigate();
@@ -11,7 +12,11 @@ const [password, setPassword] = useState("");
 const handleLogin = async () => {
 
   if (!email || !password) {
-    alert("Fill all fields");
+    Swal.fire({
+      icon: "warning",
+      title: "Fill all fields",
+      confirmButtonColor: "#7c3aed"
+    });
     return;
   }
 
@@ -36,7 +41,12 @@ const handleLogin = async () => {
       await response.json();
 
     if (!response.ok) {
-      alert(data.message);
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: data.message,
+        confirmButtonColor: "#7c3aed"
+      });
       return;
     }
 
@@ -45,8 +55,12 @@ const handleLogin = async () => {
       JSON.stringify(data.user)
     );
 
-    alert("Login Successful");
-
+    Swal.fire({
+      icon: "success",
+      title: "Login Successful",
+      text: "Welcome back!",
+      confirmButtonColor: "#7c3aed"
+    });
     const redirectTo =
       location.state?.redirectTo;
 
@@ -69,9 +83,12 @@ const handleLogin = async () => {
 
     console.error(error);
 
-    alert(
-      "Backend Connection Failed"
-    );
+    Swal.fire({
+      icon: "error",
+      title: "Login Failed",
+      text: "Backend Connection Failed",
+      confirmButtonColor: "#7c3aed"
+    });
   }
 };
   return (
