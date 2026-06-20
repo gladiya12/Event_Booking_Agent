@@ -218,8 +218,6 @@ function Home() {
                    Reviews)
                 </div>
 
-                <p>📅 {event.date}</p>
-
                 <p>📍 {event.venue}</p>
 
                 <p

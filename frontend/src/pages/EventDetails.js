@@ -57,30 +57,46 @@ function EventDetails() {
   }, [id]);
 
   if (!event) {
-  return (
-    <>
-      <Navbar />
-      <h2
-        style={{
-          textAlign: "center",
-          marginTop: "100px"
-        }}
-      >
-        Loading...
-      </h2>
-    </>
-  );
-}
+    return (
+      <>
+        <Navbar />
+        <h2
+          style={{
+            textAlign: "center",
+            marginTop: "100px"
+          }}
+        >
+          Loading...
+        </h2>
+      </>
+    );
+  }
 
-const occupiedSeats =
-  JSON.parse(
-    localStorage.getItem(
-      `occupiedSeats_${event.id}`
-    )
-  ) || [];
+  const selectedSchedule =
+    event.schedules?.find(
+      (schedule) =>
+        schedule.date === selectedDate
+    );
 
-const seatsLeft =
-  totalSeats - occupiedSeats.length;
+  const occupiedSeats =
+    JSON.parse(
+      localStorage.getItem(
+        `occupiedSeats_${event.id}`
+      )
+    ) || [];
+
+  const seatsLeft =
+    totalSeats - occupiedSeats.length;
+
+  const infoCardStyle = {
+    background: "white",
+    padding: "25px",
+    borderRadius: "18px",
+    textAlign: "center",
+    boxShadow: "0 8px 20px rgba(0,0,0,0.06)",
+    border: "1px solid #e2e8f0"
+  };
+
   return (
     <>
       <Navbar />
@@ -168,7 +184,7 @@ const seatsLeft =
               fontSize: "18px"
             }}
           >
-            <span>📅 {event.date}</span>
+
             <span>📍 {event.venue}</span>
             <span>🎟 ₹{event.price}</span>
           </div>
@@ -236,12 +252,28 @@ const seatsLeft =
                   marginTop: "20px"
                 }}
               >
-                <div>✅ Certificate Included</div>
-                <div>✅ Industry Experts</div>
-                <div>✅ Hands-on Workshop</div>
-                <div>✅ Networking Session</div>
-                <div>✅ Career Guidance</div>
-                <div>✅ Live Demonstration</div>
+                {[
+                  "Certificate Included",
+                  "Industry Experts",
+                  "Hands-on Workshop",
+                  "Networking Session",
+                  "Career Guidance",
+                  "Live Demonstration"
+                ].map((item) => (
+                  <div
+                    key={item}
+                    style={{
+                      background: "#f8fafc",
+                      padding: "15px",
+                      borderRadius: "12px",
+                      fontWeight: "600",
+                      color: "#334155",
+                      border: "1px solid #e2e8f0"
+                    }}
+                  >
+                    ✅ {item}
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -255,44 +287,21 @@ const seatsLeft =
                 gap: "20px"
               }}
             >
-              <div
-                style={{
-                  background: "white",
-                  padding: "25px",
-                  borderRadius: "16px",
-                  textAlign: "center",
-                  boxShadow: "0 5px 15px rgba(0,0,0,0.08)"
-                }}
-              >
-                <h3>📅 Date</h3>
-                <p>{event.date}</p>
-              </div>
 
-              <div
-                style={{
-                  background: "white",
-                  padding: "25px",
-                  borderRadius: "16px",
-                  textAlign: "center",
-                  boxShadow: "0 5px 15px rgba(0,0,0,0.08)"
-                }}
-              >
-                <h3>📍 Venue</h3>
-                <p>{event.venue}</p>
-              </div>
+              <div style={infoCardStyle}>
+              <h3>📍 Venue</h3>
+              <p>{event.venue}</p>
+            </div>
 
-              <div
-                style={{
-                  background: "white",
-                  padding: "25px",
-                  borderRadius: "16px",
-                  textAlign: "center",
-                  boxShadow: "0 5px 15px rgba(0,0,0,0.08)"
-                }}
-              >
-                <h3>🎫 Category</h3>
-                <p>{event.category}</p>
-              </div>
+            <div style={infoCardStyle}>
+              <h3>🎫 Category</h3>
+              <p>{event.category}</p>
+            </div>
+
+            <div style={infoCardStyle}>
+              <h3>💰 Ticket Price</h3>
+              <p>₹{event.price}</p>
+            </div>
             </div>
 
             {/* REVIEWS */}
@@ -360,7 +369,7 @@ const seatsLeft =
 
             {/* RECOMMENDATIONS */}
             <div style={{ marginTop: "50px" }}>
-              <h2>AI Recommended Events</h2>
+              <h2>You May Also Like</h2>
 
               <div
                 style={{
@@ -409,7 +418,14 @@ const seatsLeft =
                       <h3>{item.name}</h3>
 
                       <p style={{ color: "#64748b" }}>
-                        📅 {item.date}
+                        📅 {
+                          new Date(item.schedules?.[0]?.date)
+                            .toLocaleDateString("en-IN", {
+                              day: "numeric",
+                              month: "short",
+                              year: "numeric"
+                            })
+                        }
                       </p>
 
                       <p style={{ color: "#64748b" }}>
@@ -441,8 +457,8 @@ const seatsLeft =
               <h1
                 style={{
                   color: "#10b981",
-                  fontSize: "60px",
-                  marginBottom: "10px"
+                  fontSize: "64px",
+                  marginBottom: "0"
                 }}
               >
                 ₹{event.price}
@@ -451,11 +467,40 @@ const seatsLeft =
               <p
                 style={{
                   color: "#64748b",
-                  marginBottom: "25px"
+                  fontSize: "16px"
                 }}
               >
-                 Entry Pass Included
+                Per Attendee
               </p>
+
+              <hr
+                style={{
+                  border: "none",
+                  borderTop: "1px solid #e2e8f0",
+                  marginBottom: "25px"
+                }}
+              />
+
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                  marginBottom: "25px",
+                  color: "#475569"
+                }}
+              >
+                <div>📍 {event.venue}</div>
+                <div>🎫 {event.category}</div>
+              </div>
+
+              <hr
+                style={{
+                  border: "none",
+                  borderTop: "1px solid #e2e8f0",
+                  marginBottom: "25px"
+                }}
+              />
 
               <h3
                 style={{
@@ -471,37 +516,40 @@ const seatsLeft =
                 style={{
                   display: "flex",
                   flexWrap: "wrap",
-                  gap: "10px",
-                  marginBottom: "20px"
+                  gap: "12px",
+                  marginBottom: "25px"
                 }}
               >
-                {[
-                  "20 Jun 2026",
-                  "21 Jun 2026",
-                  "22 Jun 2026"
-                ].map((date) => (
+                {event.schedules?.map((schedule) => (
                   <button
-                    key={date}
+                    key={schedule.date}
                     onClick={() => {
-                      setSelectedDate(date);
+                      setSelectedDate(schedule.date);
                       setSelectedTime("");
                     }}
                     style={{
-                      padding: "10px 15px",
-                      borderRadius: "10px",
+                      padding: "14px 24px",
+                      borderRadius: "12px",
                       border:
-                        selectedDate === date
+                        selectedDate === schedule.date
                           ? "2px solid #7c3aed"
-                          : "1px solid #cbd5e1",
+                          : "1px solid #e2e8f0",
                       background:
-                        selectedDate === date
-                          ? "#ede9fe"
+                        selectedDate === schedule.date
+                          ? "#f3e8ff"
                           : "white",
+                      color: "#0f172a",
+                      fontWeight: "600",
                       cursor: "pointer",
-                      fontWeight: "600"
+                      transition: "0.3s"
                     }}
                   >
-                    {date}
+                    {new Date(schedule.date)
+                      .toLocaleDateString("en-IN", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric"
+                      })}
                   </button>
                 ))}
               </div>
@@ -520,38 +568,37 @@ const seatsLeft =
       style={{
         display: "flex",
         flexWrap: "wrap",
-        gap: "10px",
-        marginBottom: "20px"
+        gap: "12px",
+        marginBottom: "25px"
       }}
     >
-      {[
-        "10:00 AM",
-        "02:00 PM",
-        "07:00 PM"
-      ].map((time) => (
-        <button
-          key={time}
-          onClick={() =>
-            setSelectedTime(time)
-          }
-          style={{
-            padding: "10px 15px",
-            borderRadius: "10px",
-            border:
-              selectedTime === time
-                ? "2px solid #7c3aed"
-                : "1px solid #cbd5e1",
-            background:
-              selectedTime === time
-                ? "#ede9fe"
-                : "white",
-            cursor: "pointer",
-            fontWeight: "600"
-          }}
-        >
-          {time}
-        </button>
-      ))}
+      {selectedSchedule?.time_slots.map(
+        (time) => (
+          <button
+            key={time}
+            onClick={() =>
+              setSelectedTime(time)
+            }
+            style={{
+              padding: "12px 18px",
+              borderRadius: "12px",
+              border:
+                selectedTime === time
+                  ? "2px solid #7c3aed"
+                  : "1px solid #e2e8f0",
+              background:
+                selectedTime === time
+                  ? "#f3e8ff"
+                  : "white",
+              fontWeight: "600",
+              cursor: "pointer",
+              transition: "0.3s"
+            }}
+          >
+            {time}
+          </button>
+        )
+      )}
     </div>
   </>
 )}
@@ -570,29 +617,29 @@ const seatsLeft =
               </ul>
 
               <p
-  style={{
-    color:
-      seatsLeft < 50
-        ? "#ef4444"
-        : "#16a34a",
-    fontWeight: "bold",
-    marginTop: "20px"
-  }}
->
-  {seatsLeft < 50
-    ? `🔥 Fast Filling - Only ${seatsLeft} Seats Left`
-    : `${seatsLeft} Seats Available`}
-    
-</p>
-<p
-  style={{
-    color: "#64748b",
-    fontSize: "14px",
-    marginTop: "5px"
-  }}
->
-  {occupiedSeats.length} seats already booked
-</p>
+                style={{
+                  color:
+                    seatsLeft < 50
+                      ? "#ef4444"
+                      : "#16a34a",
+                  fontWeight: "bold",
+                  marginTop: "20px"
+                }}
+              >
+                {seatsLeft < 50
+                  ? `🔥 Fast Filling - Only ${seatsLeft} Seats Left`
+                  : `${seatsLeft} Seats Available`}
+                  
+              </p>
+              <p
+                style={{
+                  color: "#64748b",
+                  fontSize: "14px",
+                  marginTop: "5px"
+                }}
+              >
+                {occupiedSeats.length} seats already booked
+              </p>
 
               <div
                 style={{
@@ -653,7 +700,7 @@ const seatsLeft =
         : 1
   }}
 >
-  Book Now →
+  Reserve Your Seat →
 </button>
             </div>
           </div>

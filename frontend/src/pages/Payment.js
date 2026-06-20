@@ -467,7 +467,6 @@ if (!response.ok) {
                 {bookingId}
               </p>
 
-              <p>📅 {event.date}</p>
               <p>📆 {selectedDate}</p>
               <p>🕒 {selectedTime}</p>
               <p>📍 {event.venue}</p>

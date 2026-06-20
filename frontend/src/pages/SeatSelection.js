@@ -10,8 +10,12 @@ function SeatSelection() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [selectedSeats, setSelectedSeats] = useState([]);
-  const [ticketCount, setTicketCount] = useState(1);
+  const [selectedSeats, setSelectedSeats] = useState(
+    location.state?.seats || []
+  );
+  const [ticketCount, setTicketCount] = useState(
+    location.state?.seats?.length || 1
+  );
   useEffect(() => {
     const currentUser = localStorage.getItem("currentUser");
 
@@ -411,6 +415,7 @@ boxShadow:
             <h3>Select Number of Tickets</h3>
 
 <select
+  disabled={location.state?.seats}
   value={ticketCount}
   onChange={(e) =>
     setTicketCount(Number(e.target.value))
@@ -437,7 +442,7 @@ boxShadow:
     display: "flex",
     justifyContent: "center",
     gap: "30px",
-    marginTop: "40px",
+    marginTop: "10px",
   }}
 >
   <div
@@ -445,8 +450,8 @@ boxShadow:
     display: "flex",
     justifyContent: "center",
     gap: "40px",
-    marginTop: "30px",
-    marginBottom: "20px",
+    marginTop: "10px",
+    marginBottom: "10px",
   }}
 >
   <div>

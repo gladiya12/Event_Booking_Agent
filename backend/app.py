@@ -1,3 +1,5 @@
+from datetime import datetime
+from email import message
 import os
 from dotenv import load_dotenv
 from flask import Flask, jsonify, request
@@ -6,7 +8,40 @@ from flask_mail import Mail, Message
 import mysql.connector
 import json
 import random
+import re
+import requests
 
+import requests
+import os
+
+def ask_lyzr(message):
+
+    url = "https://agent-prod.studio.lyzr.ai/v3/inference/chat/"
+
+    headers = {
+        "Content-Type": "application/json",
+        "x-api-key": os.getenv("LYZR_API_KEY")
+    }
+
+    payload = {
+        "user_id": "eventhub_user",
+        "agent_id": os.getenv("LYZR_AGENT_ID"),
+        "session_id": "eventhub_session",
+        "message": message
+    }
+
+    response = requests.post(
+        url,
+        headers=headers,
+        json=payload
+    )
+
+    print("STATUS =", response.status_code)
+    print("TEXT =", response.text)
+
+    return response.json()
+
+print(requests.__version__)
 load_dotenv()
 
 def get_db():
@@ -22,6 +57,7 @@ print("MySQL Connected Successfully")
 app = Flask(__name__)
 CORS(app)
 generated_otp = ""
+booking_sessions = {}
 
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 587
@@ -403,22 +439,6 @@ def event_rating(event_id):
 
     return jsonify(result)
 
-@app.route("/chat", methods=["POST"])
-def chat():
-
-    data = request.json
-
-    message = data["message"]
-
-    reply = (
-        "Welcome to EventHub! "
-        "Ask me about events, bookings, venues and tickets."
-    )
-
-    return jsonify({
-        "reply": reply
-    })
-
 @app.route("/event-reviews/<int:event_id>")
 def event_reviews(event_id):
 
@@ -559,6 +579,707 @@ def verify_otp():
         "success": False,
         "message": "Invalid OTP"
     }), 400
+
+@app.route("/search-events")
+def search_events():
+
+    category = request.args.get("category")
+    city = request.args.get("city")
+    date = request.args.get("date")
+    time = request.args.get("time")
+
+    with open("data/events.json", "r") as file:
+        events = json.load(file)
+
+    results = []
+
+    for event in events:
+
+        venue_match = (
+            city.lower() in event["venue"].lower()
+            if city else True
+        )
+
+        category_match = (
+            category.lower() in event["category"].lower()
+            if category else True
+        )
+
+        date_match = False
+        time_match = False
+
+        for schedule in event["schedules"]:
+
+            if date and schedule["date"] == date:
+                date_match = True
+
+                if time:
+                    if time in schedule["time_slots"]:
+                        time_match = True
+
+        if venue_match and category_match:
+
+            if date:
+                if not date_match:
+                    continue
+
+            if time:
+                if not time_match:
+                    continue
+
+            results.append(event)
+
+    return jsonify(results)
+
+@app.route("/chat", methods=["POST"])
+def chat():
+
+    data = request.json
+    message = data["message"].lower().strip()
+    print("SESSION =", booking_sessions)
+    print("MESSAGE =", message)
+
+    with open("data/events.json", "r") as file:
+        events = json.load(file)
+
+    # -----------------------------
+    # EXISTING BOOKING SESSION
+    # -----------------------------
+    if "current" in booking_sessions:
+
+        current_booking = booking_sessions["current"]
+
+        month_date_match = re.search(
+            r"(january|february|march|april|may|june|july|august|september|october|november|december)\s+(\d{1,2})",
+            message
+        )
+
+        if current_booking["date"] is None:
+
+            if month_date_match:
+
+                month_name = month_date_match.group(1)
+                day = int(month_date_match.group(2))
+
+                month_number = datetime.strptime(
+                    month_name,
+                    "%B"
+                ).month
+
+                current_year = datetime.now().year
+
+                current_booking["date"] = (
+                    f"{current_year}-{month_number:02d}-{day:02d}"
+                )
+
+            elif re.match(r"\d{4}-\d{2}-\d{2}", message):
+
+                current_booking["date"] = message
+
+        # -----------------------------
+        # AUTO EXTRACT TICKETS
+        # -----------------------------
+        if current_booking["tickets"] is None:
+
+            ticket_match = re.search(
+                r"(\d+)\s*(ticket|tickets)?",
+                message
+            )
+
+            if ticket_match:
+
+                number = int(
+                    ticket_match.group(1)
+                )
+
+                # Avoid treating dates as ticket count
+                if number <= 20:
+
+                    current_booking["tickets"] = number
+
+        # Auto extract date
+        date_match = re.search(
+            r"\d{4}-\d{2}-\d{2}",
+            message
+        )
+
+        if date_match:
+
+            current_booking["date"] = date_match.group()
+
+        # Auto extract time
+        time_match = re.search(
+            r"\d{1,2}(:\d{2})?\s?(am|pm)",
+            message
+        )
+
+        if time_match:
+
+            current_booking["time"] = (
+                time_match.group()
+            )
+
+        # -----------------------------
+        # ASK TICKETS
+        # -----------------------------
+        if current_booking["tickets"] is None:
+
+            return jsonify({
+                "reply":
+                "Please enter the number of tickets."
+            })
+
+        # -----------------------------
+        # ASK DATE
+        # -----------------------------
+        elif current_booking["date"] is None:
+
+            dates = [
+                schedule["date"]
+                for schedule in current_booking["event"]["schedules"]
+            ]
+
+            return jsonify({
+                "reply":
+                "Available Dates:\n\n"
+                + "\n".join(dates)
+            })
+
+        # -----------------------------
+        # ASK TIME
+        # -----------------------------
+        elif current_booking["time"] is None:
+
+            available_times = []
+
+            for schedule in current_booking["event"]["schedules"]:
+
+                if schedule["date"] == current_booking["date"]:
+
+                    available_times = schedule["time_slots"]
+                    break
+
+            return jsonify({
+                "reply":
+                "Available Time Slots:\n\n"
+                + "\n".join(available_times)
+            })
+
+        # -----------------------------
+        # SHOW SUMMARY
+        # -----------------------------
+
+        valid = False
+
+        selected_time = (
+            current_booking["time"]
+            .strip()
+            .upper()
+        )
+
+        for schedule in current_booking["event"]["schedules"]:
+
+            if schedule["date"] == current_booking["date"]:
+
+                for slot in schedule["time_slots"]:
+
+                    if slot.strip().upper() == selected_time:
+
+                        valid = True
+                        break
+
+                    print("DATE =", current_booking["date"])
+                    print("TIME =", current_booking["time"])
+                    print("VALID =", valid)
+
+        if not valid:
+
+            available_slots = []
+
+            for schedule in current_booking["event"]["schedules"]:
+
+                if schedule["date"] == current_booking["date"]:
+
+                    available_slots = schedule["time_slots"]
+                    break
+
+            return jsonify({
+                "reply":
+                f"""
+Selected time is not available.
+
+Available slots for {current_booking['date']}:
+
+{chr(10).join(available_slots)}
+"""
+            })
+
+        elif current_booking["confirmed"] is False:
+
+            confirmation_words = [
+                "yes",
+                "confirm",
+                "confirmed",
+                "proceed",
+                "continue booking"
+            ]
+
+            if any(word in message for word in confirmation_words):
+
+                current_booking["confirmed"] = True
+
+                return jsonify({
+                    "reply":
+                    """
+Choose Seat Preference
+
+1. Front
+2. Middle
+3. Back
+"""
+                })
+
+            return jsonify({
+                "reply":
+                f"""
+Booking Summary
+
+🎫 Event: {current_booking['event']['name']}
+👥 Tickets: {current_booking['tickets']}
+📅 Date: {current_booking['date']}
+⏰ Time: {current_booking['time']}
+
+Reply YES to confirm booking.
+"""
+            })
+
+        # -----------------------------
+        # SEAT PREFERENCE
+        # -----------------------------
+        elif current_booking["seat_preference"] is None:
+
+            print("SEAT MESSAGE =", message)
+
+            seat = None
+
+            if (
+                "front" in message
+                or "seat preference: front" in message
+                or "(option 1)" in message
+                or message == "1"
+            ):
+                seat = "front"
+
+            elif (
+                "middle" in message
+                or "seat preference: middle" in message
+                or "(option 2)" in message
+                or message == "2"
+            ):
+                seat = "middle"
+
+            elif (
+                "back" in message
+                or "seat preference: back" in message
+                or "(option 3)" in message
+                or message == "3"
+            ):
+                seat = "back"
+
+            print("DETECTED SEAT =", seat)
+
+            if seat is None:
+                return jsonify({
+                    "reply":
+                    "Choose Front, Middle or Back."
+                })
+
+            current_booking["seat_preference"] = seat
+
+            prefix = (
+                "F"
+                if seat == "front"
+                else "M"
+                if seat == "middle"
+                else "B"
+            )
+
+            start = random.randint(1, 20)
+
+            seats = []
+
+            for i in range(
+                current_booking["tickets"]
+            ):
+                seats.append(
+                    f"{prefix}{start+i}"
+                )
+
+            current_booking["seats"] = seats
+
+            total_amount = (
+                current_booking["event"]["price"]
+                * current_booking["tickets"]
+            )
+
+            return jsonify({
+                "reply":
+                f"""
+Seat Allocation Completed ✅
+
+🎫 Event:
+{current_booking['event']['name']}
+
+👥 Tickets:
+{current_booking['tickets']}
+
+💺 Suggested Seats:
+{", ".join(seats)}
+
+💰 Ticket Price:
+₹{current_booking['event']['price']}
+
+💵 Total Amount:
+₹{total_amount}
+
+Click View Seat Map to preview or modify seats.
+""",
+                "bookingData": {
+                    "event": current_booking["event"],
+                    "seats": seats,
+                    "tickets": current_booking["tickets"],
+                    "date": current_booking["date"],
+                    "time": current_booking["time"]
+                }
+            })
+
+
+    recommendation_keywords = [
+        "recommend",
+        "suggest",
+        "fun",
+        "interesting",
+        "popular"
+    ]
+
+    if any(word in message for word in recommendation_keywords):
+
+        lyzr_response = ask_lyzr(message)
+
+        print("LYZR RESPONSE =", lyzr_response)
+
+        return jsonify({
+            "reply": lyzr_response.get(
+                "response",
+                "Sorry, I couldn't generate recommendations."
+            )
+        })
+    # -----------------------------
+    # BOOKING INTENT
+    # -----------------------------
+
+    if "book" in message:
+
+        booking_sessions.pop("current", None)
+
+        matched_event = None
+
+        for event in events:
+            if event["name"].lower() in message:
+                matched_event = event
+                break
+
+        if matched_event:
+
+            # Extract tickets
+            ticket_match = re.search(
+                r"(\d+)\s*(ticket|tickets|member|members)",
+                message
+            )
+
+            tickets = (
+                int(ticket_match.group(1))
+                if ticket_match
+                else None
+            )
+
+            # Extract date
+            booking_date = None
+
+            date_match = re.search(
+                r"\d{4}-\d{2}-\d{2}",
+                message
+            )
+
+            if date_match:
+
+                booking_date = date_match.group()
+
+            else:
+
+                month_match = re.search(
+                    r"(january|february|march|april|may|june|july|august|september|october|november|december)\s+(\d{1,2})",
+                    message
+                )
+
+                if month_match:
+
+                    month_name = month_match.group(1)
+                    day = int(month_match.group(2))
+
+                    month_number = datetime.strptime(
+                        month_name,
+                        "%B"
+                    ).month
+
+                    current_year = datetime.now().year
+
+                    booking_date = (
+                        f"{current_year}-{month_number:02d}-{day:02d}"
+                    )
+
+            # Extract time
+            time_match = re.search(
+                r"\d{1,2}(:\d{2})?\s?(am|pm)",
+                message
+            )
+
+            booking_time = (
+                time_match.group()
+                if time_match
+                else None
+            )
+
+            # Validate date
+            available_dates = [
+                schedule["date"]
+                for schedule in matched_event["schedules"]
+            ]
+
+            if booking_date and booking_date not in available_dates:
+
+                booking_sessions["current"] = {
+                    "event": matched_event,
+                    "tickets": tickets,
+                    "date": None,
+                    "time": booking_time,
+                    "seat_preference": None,
+                    "confirmed": False,
+                    "seats": None,
+                    "seat_confirmed": False
+                }
+
+                return jsonify({
+                    "reply":
+                    f"""
+    Requested date is not available.
+
+    Available Dates:
+
+    {chr(10).join(available_dates)}
+
+    Please select one of the above dates.
+    """
+                })
+
+            booking_sessions["current"] = {
+                "event": matched_event,
+                "tickets": tickets,
+                "date": booking_date,
+                "time": booking_time,
+                "seat_preference": None,
+                "confirmed": False,
+                "seats": None,
+                "seat_confirmed": False
+            }
+
+            # If all details provided
+            if tickets and booking_date and booking_time:
+
+                valid = False
+
+                for schedule in matched_event["schedules"]:
+
+                    if schedule["date"] == booking_date:
+
+                        for slot in schedule["time_slots"]:
+
+                            if slot.lower() == booking_time.lower():
+
+                                valid = True
+                                break
+
+                if not valid:
+
+                    available_slots = []
+
+                    for schedule in matched_event["schedules"]:
+
+                        if schedule["date"] == booking_date:
+
+                            available_slots = schedule["time_slots"]
+                            break
+
+                    return jsonify({
+                        "reply":
+                        f"""
+    Selected time is not available.
+
+    Available slots for {booking_date}:
+
+    {chr(10).join(available_slots)}
+    """
+                    })
+
+                return jsonify({
+                    "reply":
+                    f"""
+    Booking Summary
+
+    🎫 Event: {matched_event['name']}
+    👥 Tickets: {tickets}
+    📅 Date: {booking_date}
+    ⏰ Time: {booking_time}
+
+    Reply YES to confirm booking.
+    """
+                })
+
+            return jsonify({
+                "reply":
+                f"""
+    Booking Started ✅
+
+    🎫 Event: {matched_event['name']}
+    👥 Tickets: {tickets if tickets else 'Not Provided'}
+    📅 Date: {booking_date if booking_date else 'Not Provided'}
+    ⏰ Time: {booking_time if booking_time else 'Not Provided'}
+
+    Continue booking...
+    """
+            })
+
+    # -----------------------------
+    # EVENT NAME MATCH
+    # -----------------------------
+
+    for event in events:
+
+        if event["name"].lower() in message:
+
+            booking_sessions["current"] = {
+                "event": event,
+                "tickets": None,
+                "date": None,
+                "time": booking_time,
+                "seat_preference": None,
+                "confirmed": False,
+                "seats": None,
+                "seat_confirmed": False
+            }
+
+            return jsonify({
+                "reply":
+                f"""
+    Event Selected ✅
+
+    🎫 {event['name']}
+    📂 {event['category']}
+    💰 ₹{event['price']}
+    📍 {event['venue']}
+
+    How many tickets would you like to book?
+    """
+            })
+
+    # -----------------------------
+    # CATEGORY SEARCH
+    # -----------------------------
+
+    matched_events = []
+
+    for event in events:
+
+        if event["category"].lower() in message:
+            matched_events.append(event)
+
+    if matched_events:
+
+        reply = "I found these events:\n\n"
+
+        for event in matched_events[:5]:
+
+            reply += (
+                f"🎫 {event['name']}\n"
+                f"📂 {event['category']}\n"
+                f"💰 ₹{event['price']}\n"
+                f"📍 {event['venue']}\n"
+                f"---------------------\n"
+            )
+
+        return jsonify({
+            "reply": reply
+        })
+
+    return jsonify({
+        "reply":
+        "Sorry. I couldn't find any matching event."
+    })
+@app.route("/ai-booking", methods=["POST"])
+def ai_booking():
+
+    data = request.json
+
+    event_id = data["event_id"]
+    tickets = data["tickets"]
+    date = data["date"]
+    time = data["time"]
+    seat_preference = data["seat_preference"]
+
+    with open("data/events.json", "r") as file:
+        events = json.load(file)
+
+    selected_event = None
+
+    for event in events:
+        if event["id"] == event_id:
+            selected_event = event
+            break
+
+    if not selected_event:
+        return jsonify({
+            "message": "Event not found"
+        }), 404
+
+    if seat_preference.lower() == "front":
+        prefix = "F"
+
+    elif seat_preference.lower() == "middle":
+        prefix = "M"
+
+    else:
+        prefix = "B"
+
+    seats = []
+
+    start = random.randint(1, 20)
+
+    for i in range(tickets):
+        seats.append(
+            f"{prefix}{start+i}"
+        )
+
+    total_amount = (
+        selected_event["price"] * tickets
+    )
+
+    return jsonify({
+        "event": selected_event,
+        "seats": seats,
+        "total_amount": total_amount,
+        "date": date,
+        "time": time
+    })
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ChatBot() {
 
+  const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
   const [open, setOpen] = useState(false);
@@ -33,7 +35,8 @@ function ChatBot() {
         ...prev,
         {
           user: message,
-          bot: data.reply
+          bot: data.reply,
+          bookingData: data.bookingData
         }
       ]);
 
@@ -200,7 +203,36 @@ function ChatBot() {
                           "inline-block"
                       }}
                     >
-                      {item.bot}
+                      <div style={{ whiteSpace: "pre-line" }}>
+                        {item.bot}
+                        {
+                          item.bookingData && (
+                            <button
+                              onClick={() =>
+                                navigate("/seat-selection", {
+                                  state: {
+                                    event: item.bookingData.event,
+                                    seats: item.bookingData.seats,
+                                    selectedDate: item.bookingData.date,
+                                    selectedTime: item.bookingData.time
+                                  }
+                                })
+                              }
+                              style={{
+                                marginTop: "10px",
+                                padding: "10px",
+                                border: "none",
+                                borderRadius: "8px",
+                                background: "#7c3aed",
+                                color: "white",
+                                cursor: "pointer"
+                              }}
+                            >
+                              View Seat Map
+                            </button>
+                          )
+                        }
+                      </div>
                     </span>
                   </div>
                 </div>

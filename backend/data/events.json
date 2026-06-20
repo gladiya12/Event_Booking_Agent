@@ -4,119 +4,2651 @@
     "name": "Generative AI Workshop",
     "category": "Technology",
     "price": 500,
-    "date": "2026-06-15",
     "venue": "Tidel Park, Chennai",
     "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
-    "description": "Learn Generative AI, Prompt Engineering and AI Applications from industry experts."
+    "description": "Learn Generative AI, Prompt Engineering and AI Applications from industry experts.",
+    "schedules": [
+      {
+        "date": "2026-06-15",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-06-16",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
   },
   {
     "id": 2,
     "name": "Music Concert",
     "category": "Music",
     "price": 1200,
-    "date": "2026-06-20",
     "venue": "Codissia Trade Fair Complex, Coimbatore",
     "image": "https://images.unsplash.com/photo-1501386761578-eac5c94b800a",
-    "description": "Enjoy a spectacular live concert featuring popular artists."
+    "description": "Enjoy a spectacular live concert featuring popular artists.",
+    "schedules": [
+      {
+        "date": "2026-06-20",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-06-21",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
   },
   {
     "id": 3,
     "name": "Startup Meetup",
     "category": "Business",
     "price": 300,
-    "date": "2026-06-25",
     "venue": "IITM Research Park, Chennai",
     "image": "https://images.unsplash.com/photo-1515169067868-5387ec356754",
-    "description": "Connect with founders, investors and startup enthusiasts."
+    "description": "Connect with founders, investors and startup enthusiasts.",
+    "schedules": [
+      {
+        "date": "2026-06-25",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-06-26",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
   },
   {
     "id": 4,
     "name": "Digital Marketing Masterclass",
     "category": "Marketing",
     "price": 799,
-    "date": "2026-07-02",
     "venue": "Tamil Nadu Chamber Hall, Madurai",
     "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
-    "description": "Learn advanced SEO, content marketing and social media growth."
+    "description": "Learn advanced SEO, content marketing and social media growth.",
+    "schedules": [
+      {
+        "date": "2026-07-02",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-07-03",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
   },
   {
     "id": 5,
     "name": "Full Stack Developer Bootcamp",
     "category": "Technology",
     "price": 1500,
-    "date": "2026-07-05",
     "venue": "KGiSL Campus, Coimbatore",
     "image": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4",
-    "description": "Master React, Node.js, Express and MongoDB."
+    "description": "Master React, Node.js, Express and MongoDB.",
+    "schedules": [
+      {
+        "date": "2026-07-05",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-07-06",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
   },
   {
     "id": 6,
     "name": "Food Festival",
     "category": "Food",
     "price": 250,
-    "date": "2026-07-10",
     "venue": "VOC Ground, Coimbatore",
     "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
-    "description": "Taste cuisines from top chefs and food brands."
+    "description": "Taste cuisines from top chefs and food brands.",
+    "schedules": [
+      {
+        "date": "2026-07-10",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-07-11",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
   },
   {
     "id": 7,
     "name": "Photography Workshop",
     "category": "Photography",
     "price": 600,
-    "date": "2026-07-15",
     "venue": "Kalaignar Arivalayam Hall, Trichy",
     "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32",
-    "description": "Hands-on photography training with professionals."
+    "description": "Hands-on photography training with professionals.",
+    "schedules": [
+      {
+        "date": "2026-07-15",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-07-16",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
   },
   {
     "id": 8,
     "name": "Career Guidance Summit",
     "category": "Education",
     "price": 200,
-    "date": "2026-07-18",
     "venue": "Government Arts Auditorium, Salem",
     "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
-    "description": "Career planning and job opportunities for students."
+    "description": "Career planning and job opportunities for students.",
+    "schedules": [
+      {
+        "date": "2026-07-18",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-07-19",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
   },
   {
     "id": 9,
     "name": "Robotics Expo",
     "category": "Technology",
     "price": 900,
-    "date": "2026-07-22",
     "venue": "Chennai Trade Centre, Chennai",
     "image": "https://images.unsplash.com/photo-1561144257-e32e8efc6c4f",
-    "description": "Explore AI, robotics and automation technologies."
+    "description": "Explore AI, robotics and automation technologies.",
+    "schedules": [
+      {
+        "date": "2026-07-22",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-07-23",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
   },
   {
     "id": 10,
     "name": "Fashion Show",
     "category": "Fashion",
     "price": 1000,
-    "date": "2026-07-25",
     "venue": "Le Meridien Convention Hall, Coimbatore",
     "image": "https://images.unsplash.com/photo-1496747611176-843222e1e57c",
-    "description": "Experience the latest fashion collections and trends."
+    "description": "Experience the latest fashion collections and trends.",
+    "schedules": [
+      {
+        "date": "2026-07-25",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-07-26",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
   },
   {
     "id": 11,
     "name": "Cricket Fan Fest",
     "category": "Sports",
     "price": 450,
-    "date": "2026-08-01",
     "venue": "Indian Cement Ground, Tirunelveli",
     "image": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e",
-    "description": "Meet cricket legends and enjoy interactive games."
+    "description": "Meet cricket legends and enjoy interactive games.",
+    "schedules": [
+      {
+        "date": "2026-08-01",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-08-02",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
   },
   {
     "id": 12,
     "name": "Hackathon 2026",
     "category": "Technology",
     "price": 750,
-    "date": "2026-08-08",
     "venue": "Anna University Auditorium, Chennai",
     "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
-    "description": "24-hour coding challenge with exciting prizes."
+    "description": "24-hour coding challenge with exciting prizes.",
+    "schedules": [
+      {
+        "date": "2026-08-08",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-08-09",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "AI & Machine Learning Summit",
+    "category": "Technology",
+    "price": 950,
+    "venue": "Tidel Park, Chennai",
+    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995",
+    "description": "Explore the latest advancements in AI and Machine Learning.",
+    "schedules": [
+      {
+        "date": "2026-08-12",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-08-13",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Entrepreneurship Bootcamp",
+    "category": "Business",
+    "price": 650,
+    "venue": "PSG Convention Centre, Coimbatore",
+    "image": "https://images.unsplash.com/photo-1552664730-d307ca884978",
+    "description": "Learn startup strategies and business planning.",
+    "schedules": [
+      {
+        "date": "2026-08-15",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-08-16",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Tamil Music Night",
+    "category": "Music",
+    "price": 1100,
+    "venue": "Nehru Indoor Stadium, Chennai",
+    "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f",
+    "description": "A memorable evening with leading Tamil musicians.",
+    "schedules": [
+      {
+        "date": "2026-08-18",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-08-19",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Data Science Conference",
+    "category": "Technology",
+    "price": 1200,
+    "venue": "IIT Madras Research Park, Chennai",
+    "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
+    "description": "Industry experts discuss modern data science practices.",
+    "schedules": [
+      {
+        "date": "2026-08-20",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-08-21",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Startup Pitch Fest",
+    "category": "Business",
+    "price": 400,
+    "venue": "Madurai Startup Hub, Madurai",
+    "image": "https://images.unsplash.com/photo-1559136555-9303baea8ebd",
+    "description": "Pitch your startup ideas to investors and mentors.",
+    "schedules": [
+      {
+        "date": "2026-08-23",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-08-24",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Street Food Carnival",
+    "category": "Food",
+    "price": 300,
+    "venue": "Race Course Ground, Coimbatore",
+    "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
+    "description": "Enjoy delicious street foods from across India.",
+    "schedules": [
+      {
+        "date": "2026-08-25",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-08-26",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Cloud Computing Workshop",
+    "category": "Technology",
+    "price": 850,
+    "venue": "Tech Park Auditorium, Chennai",
+    "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa",
+    "description": "Hands-on training on AWS, Azure and Cloud Architecture.",
+    "schedules": [
+      {
+        "date": "2026-08-28",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-08-29",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Digital Creators Meetup",
+    "category": "Marketing",
+    "price": 350,
+    "venue": "Phoenix Mall Hall, Chennai",
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+    "description": "Networking event for content creators and influencers.",
+    "schedules": [
+      {
+        "date": "2026-09-01",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-09-02",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Cyber Security Conference",
+    "category": "Technology",
+    "price": 1000,
+    "venue": "Anna University, Chennai",
+    "image": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87",
+    "description": "Learn about cyber threats and security practices.",
+    "schedules": [
+      {
+        "date": "2026-09-05",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-09-06",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Yoga & Wellness Retreat",
+    "category": "Health",
+    "price": 700,
+    "venue": "Yercaud Hills Resort, Salem",
+    "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773",
+    "description": "Relax and rejuvenate with yoga and wellness sessions.",
+    "schedules": [
+      {
+        "date": "2026-09-07",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-09-08",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Gaming Championship",
+    "category": "Gaming",
+    "price": 500,
+    "venue": "Trade Centre, Chennai",
+    "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e",
+    "description": "Compete in popular esports tournaments.",
+    "schedules": [
+      {
+        "date": "2026-09-10",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-09-11",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Women in Tech Summit",
+    "category": "Technology",
+    "price": 600,
+    "venue": "Le Royal Hall, Chennai",
+    "image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d",
+    "description": "Empowering women leaders in technology.",
+    "schedules": [
+      {
+        "date": "2026-09-12",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-09-13",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Investment & Finance Expo",
+    "category": "Finance",
+    "price": 550,
+    "venue": "Chamber of Commerce Hall, Coimbatore",
+    "image": "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a",
+    "description": "Learn investing strategies and financial planning.",
+    "schedules": [
+      {
+        "date": "2026-09-15",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-09-16",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Photography Walk",
+    "category": "Photography",
+    "price": 250,
+    "venue": "Marina Beach, Chennai",
+    "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32",
+    "description": "Capture stunning landscapes with experts.",
+    "schedules": [
+      {
+        "date": "2026-09-18",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-09-19",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Mobile App Development Workshop",
+    "category": "Technology",
+    "price": 850,
+    "venue": "KGiSL Campus, Coimbatore",
+    "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c",
+    "description": "Build Android and iOS apps using Flutter.",
+    "schedules": [
+      {
+        "date": "2026-09-20",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-09-21",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Travel & Adventure Expo",
+    "category": "Travel",
+    "price": 400,
+    "venue": "Convention Centre, Madurai",
+    "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828",
+    "description": "Discover exciting travel destinations and packages.",
+    "schedules": [
+      {
+        "date": "2026-09-23",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-09-24",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "name": "Robotics Challenge",
+    "category": "Technology",
+    "price": 950,
+    "venue": "PSNA College Auditorium, Dindigul",
+    "image": "https://images.unsplash.com/photo-1561144257-e32e8efc6c4f",
+    "description": "Compete in robotics and automation challenges.",
+    "schedules": [
+      {
+        "date": "2026-09-25",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-09-26",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Art & Craft Exhibition",
+    "category": "Art",
+    "price": 200,
+    "venue": "Kalaivanar Hall, Chennai",
+    "image": "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b",
+    "description": "Showcasing creative artworks and handmade crafts.",
+    "schedules": [
+      {
+        "date": "2026-09-28",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-09-29",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "name": "AI Hackathon",
+    "category": "Technology",
+    "price": 800,
+    "venue": "SRM University, Chennai",
+    "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
+    "description": "Build innovative AI solutions in 24 hours.",
+    "schedules": [
+      {
+        "date": "2026-10-02",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-10-03",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "name": "Leadership Summit",
+    "category": "Business",
+    "price": 700,
+    "venue": "Hotel Residency Towers, Coimbatore",
+    "image": "https://images.unsplash.com/photo-1517048676732-d65bc937f952",
+    "description": "Develop leadership and management skills.",
+    "schedules": [
+      {
+        "date": "2026-10-05",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-10-06",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Classical Dance Festival",
+    "category": "Cultural",
+    "price": 450,
+    "venue": "Music Academy, Chennai",
+    "image": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad",
+    "description": "Celebrating traditional Indian dance performances.",
+    "schedules": [
+      {
+        "date": "2026-10-08",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-10-09",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Blockchain Summit",
+    "category": "Technology",
+    "price": 900,
+    "venue": "Tidel Park, Chennai",
+    "image": "https://images.unsplash.com/photo-1639322537228-f710d846310a",
+    "description": "Explore blockchain innovations and Web3 applications.",
+    "schedules": [
+      {
+        "date": "2026-10-10",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-10-11",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "name": "Food Truck Festival",
+    "category": "Food",
+    "price": 250,
+    "venue": "VOC Park, Coimbatore",
+    "image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1",
+    "description": "Taste amazing dishes from popular food trucks.",
+    "schedules": [
+      {
+        "date": "2026-10-12",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-10-13",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "name": "Career Fair 2026",
+    "category": "Education",
+    "price": 150,
+    "venue": "Government College Grounds, Trichy",
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+    "description": "Meet recruiters and explore career opportunities.",
+    "schedules": [
+      {
+        "date": "2026-10-15",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-10-16",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "name": "UI UX Design Workshop",
+    "category": "Design",
+    "price": 650,
+    "venue": "Design Hub, Chennai",
+    "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+    "description": "Learn modern UI/UX design principles.",
+    "schedules": [
+      {
+        "date": "2026-10-18",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "name": "Marathon Run",
+    "category": "Sports",
+    "price": 300,
+    "venue": "Marina Beach Road, Chennai",
+    "image": "https://images.unsplash.com/photo-1552674605-db6ffd4facb5",
+    "description": "Participate in a city-wide fitness marathon.",
+    "schedules": [
+      {
+        "date": "2026-10-20",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-10-21",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Film Making Workshop",
+    "category": "Entertainment",
+    "price": 700,
+    "venue": "Film Institute, Chennai",
+    "image": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba",
+    "description": "Learn film production and storytelling.",
+    "schedules": [
+      {
+        "date": "2026-10-22",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-10-23",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "name": "Smart Cities Expo",
+    "category": "Technology",
+    "price": 950,
+    "venue": "Trade Centre, Chennai",
+    "image": "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df",
+    "description": "Innovations shaping the future of smart cities.",
+    "schedules": [
+      {
+        "date": "2026-10-25",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-10-26",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "name": "Digital Art Workshop",
+    "category": "Art",
+    "price": 500,
+    "venue": "Creative Studio, Coimbatore",
+    "image": "https://images.unsplash.com/photo-1513364776144-60967b0f800f",
+    "description": "Create digital artworks using modern tools.",
+    "schedules": [
+      {
+        "date": "2026-10-28",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-10-29",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "name": "AI Career Summit",
+    "category": "Education",
+    "price": 300,
+    "venue": "PSNA Auditorium, Dindigul",
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+    "description": "Career opportunities in AI and Data Science.",
+    "schedules": [
+      {
+        "date": "2026-11-01",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-11-02",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "name": "Machine Learning Bootcamp",
+    "category": "Technology",
+    "price": 1200,
+    "venue": "Anna University, Chennai",
+    "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
+    "description": "Learn machine learning concepts and practical applications.",
+    "schedules": [
+      {
+        "date": "2026-11-05",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-11-06",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Startup Networking Night",
+    "category": "Business",
+    "price": 400,
+    "venue": "IITM Research Park, Chennai",
+    "image": "https://images.unsplash.com/photo-1552664730-d307ca884978",
+    "description": "Meet entrepreneurs, founders and investors.",
+    "schedules": [
+      {
+        "date": "2026-11-08",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-11-09",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Tamil Cultural Fest",
+    "category": "Cultural",
+    "price": 250,
+    "venue": "Kalaivanar Arangam, Chennai",
+    "image": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad",
+    "description": "Celebrate Tamil heritage through music and dance.",
+    "schedules": [
+      {
+        "date": "2026-11-10",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-11-11",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "name": "Cloud & DevOps Summit",
+    "category": "Technology",
+    "price": 950,
+    "venue": "Tech Park, Coimbatore",
+    "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa",
+    "description": "Explore cloud infrastructure and DevOps practices.",
+    "schedules": [
+      {
+        "date": "2026-11-12",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-11-13",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "name": "Food & Dessert Festival",
+    "category": "Food",
+    "price": 300,
+    "venue": "VOC Ground, Coimbatore",
+    "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
+    "description": "Taste desserts and cuisines from top chefs.",
+    "schedules": [
+      {
+        "date": "2026-11-15",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-11-16",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "name": "Women Entrepreneurs Meet",
+    "category": "Business",
+    "price": 350,
+    "venue": "Madurai Trade Centre, Madurai",
+    "image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d",
+    "description": "Empowering women founders and business leaders.",
+    "schedules": [
+      {
+        "date": "2026-11-18",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-11-19",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "name": "Web Development Workshop",
+    "category": "Technology",
+    "price": 750,
+    "venue": "KGiSL Institute, Coimbatore",
+    "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+    "description": "Build modern websites using React and Node.js.",
+    "schedules": [
+      {
+        "date": "2026-11-20",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-11-21",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "name": "Photography Masterclass",
+    "category": "Photography",
+    "price": 650,
+    "venue": "Rockfort Hall, Trichy",
+    "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32",
+    "description": "Advanced photography techniques and editing.",
+    "schedules": [
+      {
+        "date": "2026-11-22",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-11-23",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "name": "National Hackathon Finals",
+    "category": "Technology",
+    "price": 1000,
+    "venue": "SRM University, Chennai",
+    "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
+    "description": "Compete with top innovators from across India.",
+    "schedules": [
+      {
+        "date": "2026-11-25",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-11-26",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "name": "Fitness & Wellness Expo",
+    "category": "Health",
+    "price": 450,
+    "venue": "Salem Convention Hall, Salem",
+    "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438",
+    "description": "Discover fitness products and wellness programs.",
+    "schedules": [
+      {
+        "date": "2026-11-28",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-11-29",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "name": "E-Sports Tournament",
+    "category": "Gaming",
+    "price": 550,
+    "venue": "Trade Centre, Chennai",
+    "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e",
+    "description": "Battle with gamers in popular esports titles.",
+    "schedules": [
+      {
+        "date": "2026-12-01",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-12-02",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "name": "Artificial Intelligence Conference",
+    "category": "Technology",
+    "price": 1400,
+    "venue": "Tidel Park, Chennai",
+    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995",
+    "description": "Industry leaders discuss the future of AI.",
+    "schedules": [
+      {
+        "date": "2026-12-03",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-12-04",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "name": "Digital Marketing Workshop",
+    "category": "Marketing",
+    "price": 700,
+    "venue": "Business Hub, Coimbatore",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+    "description": "Master social media and content marketing.",
+    "schedules": [
+      {
+        "date": "2026-12-05",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-12-06",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "name": "Career Connect 2026",
+    "category": "Education",
+    "price": 200,
+    "venue": "Government Arts College, Salem",
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+    "description": "Meet recruiters and explore job opportunities.",
+    "schedules": [
+      {
+        "date": "2026-12-08",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-12-09",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "name": "Music & Dance Festival",
+    "category": "Music",
+    "price": 900,
+    "venue": "Nehru Stadium, Chennai",
+    "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f",
+    "description": "Live performances by famous artists and dancers.",
+    "schedules": [
+      {
+        "date": "2026-12-10",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-12-11",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "name": "FinTech Innovation Summit",
+    "category": "Finance",
+    "price": 850,
+    "venue": "Chamber Hall, Chennai",
+    "image": "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a",
+    "description": "Explore the latest fintech innovations.",
+    "schedules": [
+      {
+        "date": "2026-12-12",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-12-13",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "name": "Mobile Gaming Fest",
+    "category": "Gaming",
+    "price": 450,
+    "venue": "Expo Centre, Madurai",
+    "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e",
+    "description": "Compete in top mobile gaming tournaments.",
+    "schedules": [
+      {
+        "date": "2026-12-15",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-12-16",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "name": "Fashion Week Tamil Nadu",
+    "category": "Fashion",
+    "price": 1200,
+    "venue": "Le Meridien Hall, Coimbatore",
+    "image": "https://images.unsplash.com/photo-1496747611176-843222e1e57c",
+    "description": "Showcasing the latest fashion collections.",
+    "schedules": [
+      {
+        "date": "2026-12-18",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-12-19",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "name": "Data Analytics Workshop",
+    "category": "Technology",
+    "price": 850,
+    "venue": "PSNA College, Dindigul",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
+    "description": "Learn data visualization and analytics.",
+    "schedules": [
+      {
+        "date": "2026-12-20",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-12-21",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "name": "College Innovation Expo",
+    "category": "Education",
+    "price": 150,
+    "venue": "Thiagarajar College, Madurai",
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+    "description": "Students showcase innovative projects.",
+    "schedules": [
+      {
+        "date": "2026-12-22",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-12-23",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "name": "Blockchain Developers Meetup",
+    "category": "Technology",
+    "price": 650,
+    "venue": "Tidel Park, Chennai",
+    "image": "https://images.unsplash.com/photo-1639322537228-f710d846310a",
+    "description": "Connect with blockchain developers and startups.",
+    "schedules": [
+      {
+        "date": "2026-12-24",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-12-25",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "name": "Christmas Music Concert",
+    "category": "Music",
+    "price": 800,
+    "venue": "Cathedral Grounds, Chennai",
+    "image": "https://images.unsplash.com/photo-1501386761578-eac5c94b800a",
+    "description": "Celebrate Christmas with live music performances.",
+    "schedules": [
+      {
+        "date": "2026-12-25",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2026-12-26",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "name": "New Year Tech Meetup",
+    "category": "Technology",
+    "price": 500,
+    "venue": "Startup Hub, Chennai",
+    "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
+    "description": "Kickstart the year with technology networking.",
+    "schedules": [
+      {
+        "date": "2027-01-02",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-01-03",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "name": "Drone Technology Expo",
+    "category": "Technology",
+    "price": 950,
+    "venue": "Anna University, Chennai",
+    "image": "https://images.unsplash.com/photo-1473968512647-3e447244af8f",
+    "description": "Explore drones and aerial technology solutions.",
+    "schedules": [
+      {
+        "date": "2027-01-05",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-01-06",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "name": "Startup Funding Workshop",
+    "category": "Business",
+    "price": 450,
+    "venue": "IITM Research Park, Chennai",
+    "image": "https://images.unsplash.com/photo-1552664730-d307ca884978",
+    "description": "Learn how to secure startup funding.",
+    "schedules": [
+      {
+        "date": "2027-01-08",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-01-09",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "name": "Artificial Intelligence Bootcamp",
+    "category": "Technology",
+    "price": 1500,
+    "venue": "PSG Tech, Coimbatore",
+    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995",
+    "description": "Comprehensive AI training for beginners.",
+    "schedules": [
+      {
+        "date": "2027-01-10",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-01-11",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "name": "Travel Photography Tour",
+    "category": "Photography",
+    "price": 900,
+    "venue": "Kodaikanal Hills",
+    "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32",
+    "description": "Capture nature and landscapes professionally.",
+    "schedules": [
+      {
+        "date": "2027-01-12",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-01-13",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "name": "Science & Innovation Fair",
+    "category": "Education",
+    "price": 200,
+    "venue": "Science Centre, Trichy",
+    "image": "https://images.unsplash.com/photo-1532094349884-543bc11b234d",
+    "description": "Explore scientific innovations and projects.",
+    "schedules": [
+      {
+        "date": "2027-01-15",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-01-16",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "name": "Robotics Workshop",
+    "category": "Technology",
+    "price": 800,
+    "venue": "Kongu Engineering College, Erode",
+    "image": "https://images.unsplash.com/photo-1561144257-e32e8efc6c4f",
+    "description": "Build and program robots from scratch.",
+    "schedules": [
+      {
+        "date": "2027-01-18",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-01-19",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "name": "Entrepreneurship Summit",
+    "category": "Business",
+    "price": 750,
+    "venue": "Convention Hall, Salem",
+    "image": "https://images.unsplash.com/photo-1517048676732-d65bc937f952",
+    "description": "Learn business growth and leadership strategies.",
+    "schedules": [
+      {
+        "date": "2027-01-20",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-01-21",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "name": "Food Carnival 2027",
+    "category": "Food",
+    "price": 250,
+    "venue": "Race Course Ground, Coimbatore",
+    "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
+    "description": "Experience delicious food from around the world.",
+    "schedules": [
+      {
+        "date": "2027-01-22",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-01-23",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "name": "National Coding Challenge",
+    "category": "Technology",
+    "price": 700,
+    "venue": "VIT Chennai",
+    "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
+    "description": "Compete with developers nationwide.",
+    "schedules": [
+      {
+        "date": "2027-01-25",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-01-26",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "name": "Fitness Marathon",
+    "category": "Sports",
+    "price": 350,
+    "venue": "Marina Beach, Chennai",
+    "image": "https://images.unsplash.com/photo-1552674605-db6ffd4facb5",
+    "description": "Run and promote a healthy lifestyle.",
+    "schedules": [
+      {
+        "date": "2027-01-28",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-01-29",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "name": "Cyber Security Workshop",
+    "category": "Technology",
+    "price": 900,
+    "venue": "Tidel Park, Chennai",
+    "image": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87",
+    "description": "Learn ethical hacking and cyber defense.",
+    "schedules": [
+      {
+        "date": "2027-02-01",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-02-02",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "name": "International Education Fair",
+    "category": "Education",
+    "price": 100,
+    "venue": "Trade Centre, Chennai",
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+    "description": "Explore global education opportunities.",
+    "schedules": [
+      {
+        "date": "2027-02-03",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-02-04",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "name": "Startup Demo Day",
+    "category": "Business",
+    "price": 300,
+    "venue": "Startup TN Hub, Chennai",
+    "image": "https://images.unsplash.com/photo-1559136555-9303baea8ebd",
+    "description": "Watch startups pitch innovative products.",
+    "schedules": [
+      {
+        "date": "2027-02-05",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-02-06",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "name": "AI Product Launch Expo",
+    "category": "Technology",
+    "price": 1000,
+    "venue": "Expo Centre, Chennai",
+    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995",
+    "description": "Discover cutting-edge AI products and tools.",
+    "schedules": [
+      {
+        "date": "2027-02-08",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-02-09",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "name": "Music Festival 2027",
+    "category": "Music",
+    "price": 1300,
+    "venue": "Nehru Stadium, Chennai",
+    "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f",
+    "description": "Enjoy performances from top artists.",
+    "schedules": [
+      {
+        "date": "2027-02-10",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-02-11",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "name": "Tech Career Bootcamp",
+    "category": "Education",
+    "price": 500,
+    "venue": "PSNA College, Dindigul",
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+    "description": "Prepare for careers in software and AI.",
+    "schedules": [
+      {
+        "date": "2027-02-12",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-02-13",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "name": "Future Tech Expo",
+    "category": "Technology",
+    "price": 1100,
+    "venue": "Chennai Trade Centre, Chennai",
+    "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa",
+    "description": "Explore emerging technologies shaping the future.",
+    "schedules": [
+      {
+        "date": "2027-02-15",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-02-16",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "name": "GenAI Innovation Summit",
+    "category": "Technology",
+    "price": 950,
+    "venue": "Tidel Park, Chennai",
+    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995",
+    "description": "Explore real-world applications of Generative AI and LLMs.",
+    "schedules": [
+      {
+        "date": "2027-02-18",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-02-19",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "name": "Startup Founders Meetup",
+    "category": "Business",
+    "price": 350,
+    "venue": "IITM Research Park, Chennai",
+    "image": "https://images.unsplash.com/photo-1552664730-d307ca884978",
+    "description": "Network with founders, investors and startup mentors.",
+    "schedules": [
+      {
+        "date": "2027-02-20",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-02-21",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "name": "Full Stack Coding Bootcamp",
+    "category": "Technology",
+    "price": 1400,
+    "venue": "KGiSL Campus, Coimbatore",
+    "image": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4",
+    "description": "Master React, Node.js and MongoDB through projects.",
+    "schedules": [
+      {
+        "date": "2027-02-22",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-02-23",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "name": "Food Lovers Fiesta",
+    "category": "Food",
+    "price": 300,
+    "venue": "VOC Ground, Coimbatore",
+    "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836",
+    "description": "Taste dishes from famous restaurants and chefs.",
+    "schedules": [
+      {
+        "date": "2027-02-24",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-02-25",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "name": "National Robotics Championship",
+    "category": "Technology",
+    "price": 1200,
+    "venue": "Anna University, Chennai",
+    "image": "https://images.unsplash.com/photo-1561144257-e32e8efc6c4f",
+    "description": "Compete in exciting robotics challenges and demonstrations.",
+    "schedules": [
+      {
+        "date": "2027-02-27",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-02-28",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "name": "Photography Adventure Camp",
+    "category": "Photography",
+    "price": 700,
+    "venue": "Kodaikanal Hills",
+    "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32",
+    "description": "Capture stunning landscapes with professional guidance.",
+    "schedules": [
+      {
+        "date": "2027-03-01",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-03-02",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "name": "Digital Marketing Summit",
+    "category": "Marketing",
+    "price": 850,
+    "venue": "Trade Centre, Madurai",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+    "description": "Learn modern marketing strategies and growth techniques.",
+    "schedules": [
+      {
+        "date": "2027-03-03",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-03-04",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "name": "Career Excellence Fair",
+    "category": "Education",
+    "price": 250,
+    "venue": "Government Arts College, Salem",
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+    "description": "Meet recruiters and discover career opportunities.",
+    "schedules": [
+      {
+        "date": "2027-03-05",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-03-06",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "name": "AI HackFest",
+    "category": "Technology",
+    "price": 900,
+    "venue": "SRM University, Chennai",
+    "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
+    "description": "Build innovative AI solutions and win exciting prizes.",
+    "schedules": [
+      {
+        "date": "2027-03-08",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-03-09",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "name": "Live Music Fiesta",
+    "category": "Music",
+    "price": 1100,
+    "venue": "Nehru Indoor Stadium, Chennai",
+    "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f",
+    "description": "Experience energetic performances by leading artists.",
+    "schedules": [
+      {
+        "date": "2027-03-10",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-03-11",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "name": "Blockchain & Web3 Conference",
+    "category": "Technology",
+    "price": 1000,
+    "venue": "Tidel Park, Chennai",
+    "image": "https://images.unsplash.com/photo-1639322537228-f710d846310a",
+    "description": "Discover blockchain innovations and decentralized applications.",
+    "schedules": [
+      {
+        "date": "2027-03-12",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-03-13",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "name": "Entrepreneurship Development Program",
+    "category": "Business",
+    "price": 500,
+    "venue": "PSG Convention Centre, Coimbatore",
+    "image": "https://images.unsplash.com/photo-1517048676732-d65bc937f952",
+    "description": "Learn essential entrepreneurial and leadership skills.",
+    "schedules": [
+      {
+        "date": "2027-03-15",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-03-16",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "name": "Cricket Fans Meetup",
+    "category": "Sports",
+    "price": 350,
+    "venue": "Indian Cement Ground, Tirunelveli",
+    "image": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e",
+    "description": "Interactive activities and meet-and-greet with cricket icons.",
+    "schedules": [
+      {
+        "date": "2027-03-17",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-03-18",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "name": "Tamil Literature Festival",
+    "category": "Cultural",
+    "price": 200,
+    "venue": "Kalaivanar Hall, Chennai",
+    "image": "https://images.unsplash.com/photo-1516979187457-637abb4f9353",
+    "description": "Celebrate Tamil literature, poetry and storytelling.",
+    "schedules": [
+      {
+        "date": "2027-03-20",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-03-21",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "name": "Cyber Defense Workshop",
+    "category": "Technology",
+    "price": 850,
+    "venue": "Tech Park Auditorium, Chennai",
+    "image": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87",
+    "description": "Hands-on training in cybersecurity and ethical hacking.",
+    "schedules": [
+      {
+        "date": "2027-03-22",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-03-23",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "name": "Fashion Trends Expo",
+    "category": "Fashion",
+    "price": 1200,
+    "venue": "Le Meridien Convention Hall, Coimbatore",
+    "image": "https://images.unsplash.com/photo-1496747611176-843222e1e57c",
+    "description": "Explore the latest fashion collections and trends.",
+    "schedules": [
+      {
+        "date": "2027-03-24",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-03-25",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "name": "Gaming Arena Championship",
+    "category": "Gaming",
+    "price": 600,
+    "venue": "Expo Centre, Chennai",
+    "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e",
+    "description": "Compete in popular esports and gaming tournaments.",
+    "schedules": [
+      {
+        "date": "2027-03-27",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-03-28",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "name": "Data Science Symposium",
+    "category": "Technology",
+    "price": 950,
+    "venue": "PSNA College, Dindigul",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
+    "description": "Learn advanced analytics, machine learning and AI.",
+    "schedules": [
+      {
+        "date": "2027-03-30",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-03-31",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "name": "Startup Investor Connect",
+    "category": "Business",
+    "price": 450,
+    "venue": "Chennai Trade Centre, Chennai",
+    "image": "https://images.unsplash.com/photo-1559136555-9303baea8ebd",
+    "description": "Connect startups with investors and venture capitalists.",
+    "schedules": [
+      {
+        "date": "2027-04-02",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-04-03",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "name": "Future of AI Conference",
+    "category": "Technology",
+    "price": 1500,
+    "venue": "IIT Madras Research Park, Chennai",
+    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995",
+    "description": "Discussions on AI trends, ethics and innovation.",
+    "schedules": [
+      {
+        "date": "2027-04-05",
+        "time_slots": [
+          "10:00 AM",
+          "02:00 PM",
+          "06:00 PM"
+        ]
+      },
+      {
+        "date": "2027-04-06",
+        "time_slots": [
+          "11:00 AM",
+          "03:00 PM"
+        ]
+      }
+    ]
   }
 ]
