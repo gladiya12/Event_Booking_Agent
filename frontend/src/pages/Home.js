@@ -10,6 +10,8 @@ function Home() {
   const [ratings, setRatings] = useState({});
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [recommendedEvents, setRecommendedEvents] =
+    useState([]);
   
   useEffect(() => {
     fetch("http://127.0.0.1:5000/events")
@@ -32,6 +34,44 @@ function Home() {
           }));
         });
       });
+  }, []);
+
+  useEffect(() => {
+
+    const currentUser = JSON.parse(
+      localStorage.getItem("currentUser")
+    );
+
+    if (!currentUser) return;
+
+    fetch(
+      `http://127.0.0.1:5000/ai-recommendations/${currentUser.id}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+
+        const names =
+          data.recommendations.response
+            .split(",")
+            .map(item => item.trim());
+
+        fetch("http://127.0.0.1:5000/events")
+          .then((res) => res.json())
+          .then((allEvents) => {
+
+            const matchedEvents =
+              allEvents.filter(event =>
+                names.includes(event.name)
+              );
+
+            setRecommendedEvents(
+              matchedEvents
+            );
+          });
+
+      })
+      .catch(console.error);
+
   }, []);
 
   const filteredEvents = events.filter((event) => {
@@ -148,6 +188,70 @@ function Home() {
   ))}
 </div>
 
+{recommendedEvents.length > 0 && (
+  <>
+    <h1
+      style={{
+        textAlign: "center",
+        marginTop: "40px",
+        marginBottom: "40px"
+      }}
+    >
+      🤖 Recommended For You
+    </h1>
+
+    <div className="event-grid">
+      {recommendedEvents.map((event) => (
+        <div
+          key={event.id}
+          className="event-card"
+        >
+          <img
+            src={event.image}
+            alt={event.name}
+            className="event-image"
+          />
+
+          <div className="event-content">
+
+            <span className="category-badge">
+              {event.category}
+            </span>
+
+            <h3
+              style={{
+                marginTop: "15px",
+                fontSize: "24px",
+                minHeight: "60px"
+              }}
+            >
+              {event.name}
+            </h3>
+
+            <p>📍 {event.venue}</p>
+
+            <p
+              style={{
+                color: "#10b981",
+                fontSize: "24px",
+                fontWeight: "bold"
+              }}
+            >
+              ₹{event.price}
+            </p>
+
+            <Link to={`/event/${event.id}`}>
+              <button className="details-btn">
+                View Details
+              </button>
+            </Link>
+
+          </div>
+        </div>
+      ))}
+    </div>
+  </>
+)}
       {/* Section Title */}
       <h1
         style={{

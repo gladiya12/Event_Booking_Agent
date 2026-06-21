@@ -1,5 +1,4 @@
 from datetime import datetime
-from email import message
 import os
 from dotenv import load_dotenv
 from flask import Flask, jsonify, request
@@ -10,9 +9,6 @@ import json
 import random
 import re
 import requests
-
-import requests
-import os
 
 def ask_lyzr(message):
 
@@ -25,7 +21,7 @@ def ask_lyzr(message):
 
     payload = {
         "user_id": "eventhub_user",
-        "agent_id": os.getenv("LYZR_AGENT_ID"),
+        "agent_id": os.getenv("LYZR_AGENT_ID_EVENTS"),
         "session_id": "eventhub_session",
         "message": message
     }
@@ -37,7 +33,7 @@ def ask_lyzr(message):
     )
 
     print("STATUS =", response.status_code)
-    print("TEXT =", response.text)
+    print("RESPONSE TEXT =", response.text)
 
     return response.json()
 
@@ -163,11 +159,6 @@ def login():
             "phone": user[3],
             "city": user[4]
         }
-    })
-@app.route("/")
-def home():
-    return jsonify({
-        "message": "Backend Running Successfully"
     })
 
 @app.route("/events")
@@ -463,31 +454,6 @@ def event_reviews(event_id):
     reviews = cursor.fetchall()
 
     return jsonify(reviews)
-
-@app.route("/test-email")
-def test_email():
-
-    try:
-
-        msg = Message(
-            "EventHub Test Email",
-            sender=os.getenv("EMAIL_USER"),
-            recipients=[os.getenv("EMAIL_USER")]
-        )
-
-        msg.body = "Email service is working successfully."
-
-        mail.send(msg)
-
-        return jsonify({
-            "message": "Email Sent Successfully"
-        })
-
-    except Exception as e:
-
-        return jsonify({
-            "error": str(e)
-        }), 500
     
 @app.route("/send-otp", methods=["POST"])
 def send_otp():
@@ -630,6 +596,101 @@ def search_events():
             results.append(event)
 
     return jsonify(results)
+
+@app.route("/recommend-events/<int:event_id>")
+def recommend_events(event_id):
+
+    with open("data/events.json", "r") as file:
+        events = json.load(file)
+
+    current_event = next(
+        (
+            e for e in events
+            if e["id"] == event_id
+        ),
+        None
+    )
+
+    if not current_event:
+        return jsonify([])
+
+    category = current_event["category"]
+
+    recommendations = [
+        e for e in events
+        if e["id"] != event_id
+        and e["category"] == category
+    ]
+
+    return jsonify(recommendations[:3])
+
+@app.route("/user-booking-history/<int:user_id>")
+def user_booking_history(user_id):
+
+    db = get_db()
+    cursor = db.cursor()
+
+    cursor.execute("""
+        SELECT event_name
+        FROM bookings
+        WHERE user_id=%s
+        ORDER BY booking_date DESC
+    """, (user_id,))
+
+    rows = cursor.fetchall()
+
+    history = [row[0] for row in rows]
+
+    cursor.close()
+    db.close()
+
+    return jsonify(history)
+
+@app.route("/ai-recommendations/<int:user_id>")
+def ai_recommendations(user_id):
+
+    db = get_db()
+    cursor = db.cursor()
+
+    cursor.execute("""
+        SELECT event_name
+        FROM bookings
+        WHERE user_id=%s
+        ORDER BY booking_date DESC
+    """, (user_id,))
+
+    rows = cursor.fetchall()
+
+    history = list(set([row[0] for row in rows]))
+
+    cursor.close()
+    db.close()
+
+    with open("data/events.json", "r") as file:
+        events = json.load(file)
+
+    history_text = ", ".join(history)
+
+    prompt = f"""
+User booked these events:
+
+{history_text}
+
+Available events:
+
+{json.dumps(events)}
+
+Recommend 5 events that match the user's interests.
+
+Return ONLY event names separated by commas.
+"""
+
+    lyzr_response = ask_lyzr(prompt)
+
+    return jsonify({
+        "recommendations": lyzr_response,
+        "events": events
+    })
 
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -1171,7 +1232,7 @@ Click View Seat Map to preview or modify seats.
                 "event": event,
                 "tickets": None,
                 "date": None,
-                "time": booking_time,
+                "time": None,
                 "seat_preference": None,
                 "confirmed": False,
                 "seats": None,

@@ -21,18 +21,18 @@ function BookingSuccess() {
 
   const submitRating = async () => {
 
-    const user = JSON.parse(
-      localStorage.getItem("currentUser")
-    );
+  const user = JSON.parse(
+    localStorage.getItem("currentUser")
+  );
 
-    if (!user) {
+  if (!user) {
 
-      Swal.fire({
-        icon: "warning",
-        title: "Login Required",
-        text: "Please login first",
-        confirmButtonColor: "#7c3aed"
-      });
+    Swal.fire({
+      icon: "warning",
+      title: "Login Required",
+      text: "Please login first",
+      confirmButtonColor: "#7c3aed"
+    });
 
       return;
     }

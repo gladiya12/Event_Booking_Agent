@@ -28,14 +28,10 @@ function EventDetails() {
         setEvent(data);
       });
 
-    fetch("http://127.0.0.1:5000/events")
+    fetch(`http://127.0.0.1:5000/recommend-events/${id}`)
       .then((response) => response.json())
-      .then((events) => {
-        const filtered = events.filter(
-          (item) => item.id !== Number(id)
-        );
-
-        setRelatedEvents(filtered);
+      .then((data) => {
+        setRelatedEvents(data);
       });
 
     fetch(
