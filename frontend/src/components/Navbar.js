@@ -1,7 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FaUserCircle } from "react-icons/fa";
-function Navbar() {
+function Navbar({
+    search,
+    setSearch,
+    selectedCategory,
+    setSelectedCategory,
+    events = []
+}) {
   const navigate = useNavigate();
 
   const currentUser = JSON.parse(
@@ -88,6 +94,71 @@ useEffect(() => {
     EventHub
   </span>
 </Link>
+
+<div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    background: "#1e293b",
+    borderRadius: "12px",
+    overflow: "hidden",
+    width: "100%",
+    maxWidth: "700px",
+    marginLeft: "20px",
+    marginRight: "20px",
+    flex: 1
+  }}
+>
+  <input
+    type="text"
+    placeholder="Search for Events, Workshops, Concerts..."
+    value={search}
+    onChange={(e) =>
+      setSearch(e.target.value)
+    }
+    style={{
+      flex: 1,
+      padding: "16px",
+      border: "none",
+      outline: "none",
+      background: "transparent",
+      color: "white",
+      fontSize: "16px"
+    }}
+  />
+
+  <select
+    value={selectedCategory}
+    onChange={(e) =>
+      setSelectedCategory(e.target.value)
+    }
+    style={{
+      padding: "16px",
+      border: "none",
+      background: "#1e293b",
+      color: "white",
+      fontSize: "16px",
+      cursor: "pointer"
+    }}
+  >
+    <option value="All">
+      All
+    </option>
+
+    {[...new Set(
+      (events || []).map(
+        (event) => event.category
+      )
+    )].map((category) => (
+      <option
+        key={category}
+        value={category}
+      >
+        {category}
+      </option>
+    ))}
+  </select>
+</div>
 
       <div
         style={{

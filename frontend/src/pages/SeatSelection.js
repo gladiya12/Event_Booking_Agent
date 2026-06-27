@@ -2,6 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { venueLayouts } from "../layouts/venueLayouts";
+import StadiumLayout from "../components/seatLayouts/StadiumLayout";
+import AuditoriumLayout from "../components/seatLayouts/AuditoriumLayout";
+import ConferenceLayout from "../components/seatLayouts/ConferenceLayout";
+import TheatreLayout from "../components/seatLayouts/TheatreLayout";
+import ExhibitionLayout from "../components/seatLayouts/ExhibitionLayout";
 import Swal from "sweetalert2";
 
 function SeatSelection() {
@@ -25,6 +31,9 @@ function SeatSelection() {
   }, [navigate]);
 
   const event = location.state?.event;
+  const venueType =
+    venueLayouts[event?.venue] ||
+    venueLayouts.default;
   const selectedDate = location.state?.selectedDate;
   const selectedTime = location.state?.selectedTime;
 
@@ -337,6 +346,7 @@ border: isOccupied
                 : "#ffffff",
               borderRadius: "20px",
               padding: "40px",
+              overflowX: "auto"
             }}
           >
             <div
@@ -364,32 +374,45 @@ border: isOccupied
 </h2>
             </div>
 
-           {renderCinemaRows(
-  VIP_ROWS,
-  4,
-  14,
-  4,
-  "VIP",
-  500
-)}
+          {
+            venueType === "stadium" && (
+              <StadiumLayout
+                renderCinemaRows={renderCinemaRows}
+              />
+            )
+          }
 
-{renderCinemaRows(
-  PREMIUM_ROWS,
-  5,
-  8,
-  5,
-  "Premium",
-  350
-)}
+          {
+            venueType === "auditorium" && (
+              <AuditoriumLayout
+                renderCinemaRows={renderCinemaRows}
+              />
+            )
+          }
 
-{renderCinemaRows(
-  STANDARD_ROWS,
-  5,
-  14,
-  5,
-  "First Class",
-  200
-)}
+          {
+            venueType === "conference" && (
+              <ConferenceLayout
+                renderCinemaRows={renderCinemaRows}
+              />
+            )
+          }
+
+          {
+            venueType === "theatre" && (
+              <TheatreLayout
+                renderCinemaRows={renderCinemaRows}
+              />
+            )
+          }
+
+          {
+            venueType === "exhibition" && (
+              <ExhibitionLayout
+                renderCinemaRows={renderCinemaRows}
+              />
+            )
+          }
           </div>
 
           <div

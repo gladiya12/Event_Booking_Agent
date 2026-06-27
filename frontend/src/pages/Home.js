@@ -12,7 +12,11 @@ function Home() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [recommendedEvents, setRecommendedEvents] =
     useState([]);
-  
+  const [showTopButton, setShowTopButton] =
+  useState(false);
+
+  const [visibleCards, setVisibleCards] = useState(4);
+
   useEffect(() => {
     fetch("http://127.0.0.1:5000/events")
       .then((response) => response.json())
@@ -74,6 +78,27 @@ function Home() {
 
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowTopButton(true);
+      } else {
+        setShowTopButton(false);
+      }
+    };
+
+    window.addEventListener(
+      "scroll",
+      handleScroll
+    );
+
+    return () =>
+      window.removeEventListener(
+        "scroll",
+        handleScroll
+      );
+  }, []);
+
   const filteredEvents = events.filter((event) => {
     const matchesSearch = event.name
       .toLowerCase()
@@ -86,14 +111,62 @@ function Home() {
     return matchesSearch && matchesCategory;
   });
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
+  useEffect(() => {
+    const updateCards = () => {
+      const width = window.innerWidth;
+
+      if (width >= 1700) {
+        setVisibleCards(5);
+      }
+      else if (width >= 1300) {
+        setVisibleCards(4);
+      }
+      else if (width >= 1000) {
+        setVisibleCards(3);
+      }
+      else if (width >= 700) {
+        setVisibleCards(2);
+      }
+      else {
+        setVisibleCards(1);
+      }
+    };
+
+    updateCards();
+
+    window.addEventListener(
+      "resize",
+      updateCards
+    );
+
+    return () =>
+      window.removeEventListener(
+        "resize",
+        updateCards
+      );
+  }, []);
+
   return (
     <>
-      <Navbar />
+      <Navbar
+        search={search}
+        setSearch={setSearch}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+        events={events}
+      />
 
       {/* Hero Section */}
       <div
         style={{
-          minHeight: "50vh",
+          minHeight: "5vh",
           background:
             "linear-gradient(135deg,#0f172a,#1e1b4b,#312e81)",
           display: "flex",
@@ -107,7 +180,7 @@ function Home() {
       >
         <h1
           style={{
-            fontSize: "clamp(2.8rem, 5vw, 4.5rem)",
+            fontSize: "clamp(2rem, 4vw, 3rem)",
             fontWeight: "700",
             lineHeight: "1.1",
             maxWidth: "900px",
@@ -128,80 +201,43 @@ function Home() {
           Find workshops, concerts and business events
           tailored to your interests.
         </p>
-
-        <input
-          type="text"
-          placeholder="Search Events..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          style={{
-            width: "550px",
-            maxWidth: "90%",
-            padding: "16px 22px",
-            borderRadius: "50px",
-            border: "none",
-            outline: "none",
-            fontSize: "17px",
-            boxShadow: "0 5px 20px rgba(0,0,0,0.25)"
-          }}
-        />
       </div>
-
-      {/* Category Buttons */}
-      <div
-  style={{
-    display: "flex",
-    justifyContent: "center",
-    flexWrap: "wrap",
-    gap: "15px",
-    marginTop: "40px",
-    marginBottom: "50px"
-  }}
->
-  {[
-    "All",
-    ...new Set(
-      events.map((event) => event.category)
-    )
-  ].map((category) => (
-    <button
-      key={category}
-      onClick={() =>
-        setSelectedCategory(category)
-      }
-      style={{
-        padding: "12px 25px",
-        borderRadius: "30px",
-        border: "none",
-        cursor: "pointer",
-        background:
-          selectedCategory === category
-            ? "#7c3aed"
-            : "#1e293b",
-        color: "white",
-        fontWeight: "600",
-        fontSize: "15px"
-      }}
-    >
-      {category}
-    </button>
-  ))}
-</div>
 
 {recommendedEvents.length > 0 && (
   <>
-    <h1
+    <div
       style={{
-        textAlign: "center",
-        marginTop: "40px",
-        marginBottom: "40px"
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        margin: "40px 50px 20px"
       }}
     >
-      🤖 Recommended For You
-    </h1>
+      <h1
+        style={{
+          margin: 0
+        }}
+      >
+        🤖 Recommended For You
+      </h1>
+
+      <Link
+        to="/events"
+        style={{
+          color: "#f97316",
+          fontWeight: "600",
+          textDecoration: "none"
+        }}
+      >
+        See All ›
+      </Link>
+    </div>
 
     <div className="event-grid">
-      {recommendedEvents.map((event) => (
+      {
+        recommendedEvents
+          .slice(0, visibleCards)
+          .map((event) => (
         <div
           key={event.id}
           className="event-card"
@@ -253,16 +289,34 @@ function Home() {
   </>
 )}
       {/* Section Title */}
-      <h1
-        style={{
-          textAlign: "center",
-          fontSize: "48px",
-          marginBottom: "50px"
-        }}
-      >
-        Featured Events
-      </h1>
+      <div
+  style={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    margin: "40px 50px 20px"
+  }}
+>
+  <h1
+    style={{
+      fontSize: "42px",
+      margin: 0
+    }}
+  >
+    Featured Events
+  </h1>
 
+  <Link
+    to="/events"
+    style={{
+      color: "#f97316",
+      fontWeight: "600",
+      textDecoration: "none"
+    }}
+  >
+    See All ›
+  </Link>
+</div>
       {/* Event Cards */}
       {filteredEvents.length === 0 ? (
         <div
@@ -277,7 +331,9 @@ function Home() {
         </div>
       ) : (
         <div className="event-grid">
-          {filteredEvents.map((event) => (
+          {filteredEvents
+            .slice(0, visibleCards)
+            .map((event) => (
             <div
               key={event.id}
               className="event-card"
@@ -343,6 +399,28 @@ function Home() {
             </div>
           ))}
         </div>
+      )}
+      {showTopButton && (
+        <button
+          onClick={scrollToTop}
+          style={{
+            position: "fixed",
+            bottom: "110px", 
+            right: "30px",
+            width: "50px",
+            height: "50px",
+            borderRadius: "50%",
+            border: "none",
+            background: "#7c3aed",
+            color: "white",
+            fontSize: "22px",
+            cursor: "pointer",
+            zIndex: 9999,
+            boxShadow: "0 4px 12px rgba(0,0,0,0.3)"
+          }}
+        >
+          ↑
+        </button>
       )}
       <ChatBot />
       <Footer />

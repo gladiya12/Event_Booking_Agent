@@ -8,32 +8,88 @@ function MyBookings() {
   const navigate = useNavigate();
   const [bookings, setBookings] = useState([]);
 
+  const [currentPage, setCurrentPage] =
+    useState(1);
+
+  const [showTopButton, setShowTopButton] =
+    useState(false);
+
+  const bookingsPerPage = 6;
+
   useEffect(() => {
 
-  const currentUser =
-    JSON.parse(
-      localStorage.getItem("currentUser")
+    const currentUser =
+      JSON.parse(
+        localStorage.getItem("currentUser")
+      );
+
+    if (!currentUser) return;
+
+    fetch(
+      `http://127.0.0.1:5000/my-bookings/${currentUser.id}`
+    )
+      .then((response) =>
+        response.json()
+      )
+      .then((data) => {
+        setBookings(data);
+      });
+
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowTopButton(true);
+      } else {
+        setShowTopButton(false);
+      }
+    };
+
+    window.addEventListener(
+      "scroll",
+      handleScroll
     );
 
-  if (!currentUser) return;
-
-  fetch(
-    `http://127.0.0.1:5000/my-bookings/${currentUser.id}`
-  )
-    .then((response) =>
-      response.json()
-    )
-    .then((data) => {
-      setBookings(data);
-    });
-
-}, []);
+    return () =>
+      window.removeEventListener(
+        "scroll",
+        handleScroll
+      );
+  }, []);
 
   const totalSpent = bookings.reduce(
-  (sum, booking) =>
-    sum + Number(booking.total_amount || 0),
-  0
-);
+    (sum, booking) =>
+      sum + Number(booking.total_amount || 0),
+    0
+  );
+
+  const lastIndex =
+    currentPage * bookingsPerPage;
+
+  const firstIndex =
+    lastIndex - bookingsPerPage;
+
+  const currentBookings =
+    bookings.slice(
+      firstIndex,
+      lastIndex
+    );
+
+  const totalPages =
+    Math.ceil(
+      bookings.length /
+      bookingsPerPage
+    );
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
+
   const cancelBooking = async (bookingId) => {
 
   const confirmCancel =
@@ -256,7 +312,7 @@ function MyBookings() {
                 gap: "30px"
               }}
             >
-              {bookings.map(
+              {currentBookings.map(
                 (booking, index) => (
                   <div
                     key={index}
@@ -472,8 +528,73 @@ function MyBookings() {
               )}
             </div>
           )}
+          {totalPages > 1 && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                gap: "10px",
+                marginTop: "40px"
+              }}
+            >
+              {[...Array(totalPages)].map(
+                (_, index) => (
+                  <button
+                    key={index}
+                    onClick={() =>
+                      setCurrentPage(index + 1)
+                    }
+                    style={{
+                      width: "45px",
+                      height: "45px",
+                      border:
+                        currentPage === index + 1
+                          ? "none"
+                          : "1px solid #ddd",
+                      background:
+                        currentPage === index + 1
+                          ? "#7c3aed"
+                          : "white",
+                      color:
+                        currentPage === index + 1
+                          ? "white"
+                          : "black",
+                      borderRadius: "8px",
+                      cursor: "pointer"
+                    }}
+                  >
+                    {index + 1}
+                  </button>
+                )
+              )}
+            </div>
+          )}
         </div>
       </div>
+
+      {showTopButton && (
+      <button
+        onClick={scrollToTop}
+        style={{
+          position: "fixed",
+          bottom: "110px",
+          right: "30px",
+          width: "50px",
+          height: "50px",
+          borderRadius: "50%",
+          border: "none",
+          background: "#7c3aed",
+          color: "white",
+          fontSize: "22px",
+          cursor: "pointer",
+          zIndex: 9999,
+          boxShadow:
+            "0 4px 12px rgba(0,0,0,0.3)"
+        }}
+      >
+        ↑
+      </button>
+    )}
 
       <Footer />
     </>

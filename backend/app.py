@@ -22,7 +22,7 @@ def ask_lyzr(message):
     payload = {
         "user_id": "eventhub_user",
         "agent_id": os.getenv("LYZR_AGENT_ID_EVENTS"),
-        "session_id": "eventhub_session",
+        "session_id": f"eventhub_{datetime.now().timestamp()}",
         "message": message
     }
 
@@ -32,13 +32,8 @@ def ask_lyzr(message):
         json=payload
     )
 
-    print("STATUS =", response.status_code)
-    print("RESPONSE TEXT =", response.text)
-
     return response.json()
 
-print(requests.__version__)
-load_dotenv()
 
 def get_db():
     return mysql.connector.connect(
